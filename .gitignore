@@ -45,3 +45,7 @@ build/
 *.zip
 *.tar.gz
 *.rar
+
+.mvn/
+mvnw
+mvnw.cmd
