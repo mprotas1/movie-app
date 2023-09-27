@@ -20,11 +20,23 @@ public class User implements UserDetails {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
     @NotNull @NotBlank @Size(min = 1, max = 15)
-    @Column(unique = true, nullable = false)
+    @Column(unique = true)
     private String username;
+
+    @NotNull @NotBlank @Size(min = 1, max = 15)
+    @Column(unique = true)
     private String email;
+
+    @NotNull @NotBlank @Size(min = 1, max = 15)
     private String password;
+
+    @ManyToMany(cascade = CascadeType.ALL,
+            fetch = FetchType.EAGER)
+    @JoinTable(name = "user_roles",
+            joinColumns = @JoinColumn(name = "user_id"),
+            inverseJoinColumns = @JoinColumn(name = "role_id"))
     private Set<Role> roles;
 
     @Override
