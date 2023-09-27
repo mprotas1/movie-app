@@ -4,5 +4,11 @@ public enum RoleType {
     USER,
     EMPLOYEE,
     MODERATOR,
-    ADMINISTRATOR
+    ADMINISTRATOR;
+
+    public final String roleName;
+
+    RoleType() {
+        roleName = "ROLE_" + this.name();
+    }
 }
