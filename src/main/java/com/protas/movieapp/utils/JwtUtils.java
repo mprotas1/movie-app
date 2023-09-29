@@ -16,7 +16,7 @@ import java.util.function.Function;
 
 @Service
 public class JwtUtils {
-    private final String ENCRYPTION_KEY = "R07phYnVlrZaP5srtt4bsqqNL80vmPIR";
+    private final String ENCRYPTION_KEY = "WVnKc0EwuPTjTzp1UfExojGyh37+bMnV6OWs3ffB5kAvt0w72ZR3cygIsQJx6IPm\n";
 
     public String generateToken(UserDetails userDetails) {
         return generateToken(new HashMap<>(), userDetails);

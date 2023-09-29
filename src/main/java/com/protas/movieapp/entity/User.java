@@ -11,6 +11,7 @@ import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import java.util.Collection;
+import java.util.HashSet;
 import java.util.Set;
 
 @Entity(name = "cinema_user")
@@ -25,11 +26,11 @@ public class User implements UserDetails {
     @Column(unique = true)
     private String username;
 
-    @NotNull @NotBlank @Size(min = 1, max = 15)
+    @NotNull @NotBlank
     @Column(unique = true)
     private String email;
 
-    @NotNull @NotBlank @Size(min = 1, max = 15)
+    @NotNull @NotBlank
     private String password;
 
     @ManyToMany(cascade = CascadeType.ALL,
@@ -74,5 +75,10 @@ public class User implements UserDetails {
     @Override
     public boolean isEnabled() {
         return true;
+    }
+
+    public Set<Role> getRoles() {
+        if(roles == null) roles = new HashSet<>();
+        return roles;
     }
 }
