@@ -19,6 +19,7 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import java.util.Optional;
 import java.util.Set;
 
 @Service
@@ -38,10 +39,10 @@ public class UserAuthService {
                 .password(encodedPassword)
                 .build();
 
-        assignToUserRole(user);
+        assignUserToRole(user);
 
         User savedUser = userRepository.save(user);
-        logger.info("Successfully register user: {} with id: {}", savedUser.getEmail(), savedUser.getId());
+        logger.info("Successfully registered user: {} with id: {}", savedUser.getEmail(), savedUser.getId());
 
         String token = jwtUtils.generateToken(savedUser);
         return new AuthenticationResponse(token);
@@ -55,16 +56,18 @@ public class UserAuthService {
                 )
         );
 
-        User user = userRepository
-                .findByEmail(request.email()).orElseThrow(
-                        () -> new UsernameNotFoundException(String.format("Could not find the user with email: %s", request.email()))
-                );
-        String token = jwtUtils.generateToken(user);
-        logger.info("Successfully authenticated user: {} with id: {}", request.email(), user.getId());
+        String email = request.email();
+        Optional<User> user = userRepository.findByEmail(email);
+        if(passwordEncoder.matches(request.password(), user.get().getPassword())) {
+            logger.info("Password is correct");
+        }
+
+        String token = jwtUtils.generateToken(user.get());
+        logger.info("Successfully authenticated user: {} with id: {}", request.email(), user.get().getId());
         return new AuthenticationResponse(token);
     }
 
-    private void assignToUserRole(User user) {
+    private void assignUserToRole(User user) {
         Role userRole = new Role();
         userRole.setRoleType(RoleType.USER);
 
