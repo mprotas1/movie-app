@@ -8,7 +8,6 @@ import com.protas.movieapp.model.AuthenticationResponse;
 import com.protas.movieapp.model.RoleType;
 import com.protas.movieapp.repository.UserRepository;
 import com.protas.movieapp.utils.JwtUtils;
-import jakarta.persistence.EntityNotFoundException;
 import lombok.RequiredArgsConstructor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -24,10 +23,12 @@ import java.util.Set;
 
 @Service
 @RequiredArgsConstructor
-public class UserAuthService implements UserDetailsService {
+public class UserAuthService {
     private final Logger logger = LoggerFactory.getLogger(UserAuthService.class.getName());
     private final UserRepository userRepository;
     private final JwtUtils jwtUtils;
+    private final PasswordEncoder passwordEncoder;
+    private final AuthenticationManager authenticationManager;
 
     public AuthenticationResponse register(RegisterRequestDTO request) {
         String encodedPassword = passwordEncoder.encode(request.password());
@@ -54,18 +55,13 @@ public class UserAuthService implements UserDetailsService {
                 )
         );
 
-        User user = (User) loadUserByUsername(request.email());
+        User user = userRepository
+                .findByEmail(request.email()).orElseThrow(
+                        () -> new UsernameNotFoundException(String.format("Could not find the user with email: %s", request.email()))
+                );
         String token = jwtUtils.generateToken(user);
         logger.info("Successfully authenticated user: {} with id: {}", request.email(), user.getId());
         return new AuthenticationResponse(token);
-    }
-
-    @Override
-    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        logger.info("I'm loading UserDetails by email: {}", username);
-        return userRepository
-                .findByEmail(username)
-                .orElseThrow(() -> new EntityNotFoundException("Could not find the appropriate entity with email: " + username));
     }
 
     private void assignToUserRole(User user) {
