@@ -1,11 +1,11 @@
 package com.protas.movieapp.entity;
 
+import com.protas.movieapp.model.RoleType;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
-import lombok.Builder;
-import lombok.Data;
+import lombok.*;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -16,7 +16,8 @@ import java.util.Set;
 
 @Entity(name = "cinema_user")
 @Data
-@Builder
+@NoArgsConstructor
+@AllArgsConstructor
 public class User implements UserDetails {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -54,7 +55,17 @@ public class User implements UserDetails {
 
     @Override
     public String getUsername() {
-        return getEmail();
+        return email;
+    }
+
+    public void setRoles(Collection<Role> rolesToAssign) {
+        if(roles == null) roles = new HashSet<>();
+        roles.forEach(this::setRoles);
+    }
+
+    public void setRoles(Role role) {
+        if(roles == null) roles = new HashSet<>();
+        roles.add(role);
     }
 
     @Override
@@ -77,8 +88,4 @@ public class User implements UserDetails {
         return true;
     }
 
-    public Set<Role> getRoles() {
-        if(roles == null) roles = new HashSet<>();
-        return roles;
-    }
 }

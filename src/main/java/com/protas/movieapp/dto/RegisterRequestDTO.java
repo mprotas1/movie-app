@@ -1,3 +1,6 @@
 package com.protas.movieapp.dto;
 
-public record RegisterRequestDTO(String email, String username, String password) { }
+import jakarta.validation.constraints.NotEmpty;
+import jakarta.validation.constraints.NotNull;
+
+public record RegisterRequestDTO(@NotEmpty String email, @NotEmpty String username, @NotEmpty @NotNull String password) { }

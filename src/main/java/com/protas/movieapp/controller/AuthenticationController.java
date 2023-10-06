@@ -4,6 +4,7 @@ import com.protas.movieapp.dto.AuthenticationRequestDTO;
 import com.protas.movieapp.dto.RegisterRequestDTO;
 import com.protas.movieapp.model.AuthenticationResponse;
 import com.protas.movieapp.service.UserAuthService;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -21,7 +22,7 @@ public class AuthenticationController {
     private final UserAuthService userAuthService;
 
     @PostMapping("/register")
-    public ResponseEntity<AuthenticationResponse> register(@RequestBody RegisterRequestDTO request) {
+    public ResponseEntity<AuthenticationResponse> register(@RequestBody @Valid RegisterRequestDTO request) {
         AuthenticationResponse authenticationResponse = userAuthService.register(request);
         logger.info("Authentication response from /register: {}", authenticationResponse);
         return ResponseEntity.ok(authenticationResponse);
