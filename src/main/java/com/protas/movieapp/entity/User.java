@@ -59,8 +59,7 @@ public class User implements UserDetails {
     }
 
     public void setRoles(Collection<Role> rolesToAssign) {
-        if(roles == null) roles = new HashSet<>();
-        roles.forEach(this::setRoles);
+        rolesToAssign.forEach(this::setRoles);
     }
 
     public void setRoles(Role role) {
