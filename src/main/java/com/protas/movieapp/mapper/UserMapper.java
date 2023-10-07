@@ -1,8 +1,8 @@
 package com.protas.movieapp.mapper;
 
 import com.protas.movieapp.dto.RegisterRequestDTO;
-import com.protas.movieapp.entity.Role;
-import com.protas.movieapp.entity.User;
+import com.protas.movieapp.entity.user.Role;
+import com.protas.movieapp.entity.user.User;
 import com.protas.movieapp.model.RoleType;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.crypto.password.PasswordEncoder;

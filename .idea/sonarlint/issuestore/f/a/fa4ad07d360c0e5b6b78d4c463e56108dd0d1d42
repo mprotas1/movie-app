@@ -1,0 +1,7 @@
+
+=
+java:S1948*"'Make "roles" transient or serializable.(öö¤
+^
+java:S42759"HRefactor this getter so that it actually refers to the field "username".(ú´­÷
+T
+java:S1128"?Remove this unused import 'com.protas.movieapp.model.RoleType'.(Ñ°P

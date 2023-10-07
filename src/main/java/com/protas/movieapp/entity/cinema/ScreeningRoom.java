@@ -1,20 +1,19 @@
-package com.protas.movieapp.entity;
+package com.protas.movieapp.entity.cinema;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
-import lombok.Builder;
 import lombok.Data;
 import org.springframework.data.annotation.Id;
 
-import java.util.List;
+import java.util.Set;
 
-@Entity(name = "cinema")
-@Data @Builder
-public class Cinema {
+@Entity(name = "screening_room")
+@Data
+public class ScreeningRoom {
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
-    private String name;
-    private Address address;
-    private List<ScreeningRoom> screeningRooms;
+    private Integer screeningRoomNumber;
+    private Set<Seat> seats;
+    private Cinema cinema;
 }

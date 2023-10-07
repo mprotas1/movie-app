@@ -2,7 +2,7 @@ package com.protas.movieapp.service;
 
 import com.protas.movieapp.dto.AuthenticationRequestDTO;
 import com.protas.movieapp.dto.RegisterRequestDTO;
-import com.protas.movieapp.entity.User;
+import com.protas.movieapp.entity.user.User;
 import com.protas.movieapp.mapper.UserMapper;
 import com.protas.movieapp.model.AuthenticationResponse;
 import com.protas.movieapp.repository.UserRepository;

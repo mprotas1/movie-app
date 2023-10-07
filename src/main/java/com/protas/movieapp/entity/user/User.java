@@ -1,6 +1,5 @@
-package com.protas.movieapp.entity;
+package com.protas.movieapp.entity.user;
 
-import com.protas.movieapp.model.RoleType;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;

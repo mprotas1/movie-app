@@ -1,9 +1,8 @@
-package com.protas.movieapp.entity;
+package com.protas.movieapp.entity.user;
 
 import com.protas.movieapp.model.RoleType;
 import jakarta.persistence.*;
 import lombok.Data;
-import lombok.RequiredArgsConstructor;
 
 @Entity
 @Data

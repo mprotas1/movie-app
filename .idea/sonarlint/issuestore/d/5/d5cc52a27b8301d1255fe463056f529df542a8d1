@@ -1,0 +1,11 @@
+
+k	java:S116"VRename this field "AUTH_HEADER" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(Èóè
+m	java:S116"XRename this field "BEARER_PREFIX" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(äº–
+M
+java:S2387"7"logger" is the name of a field in "GenericFilterBean".(ø„¡ñ
+7
+java:S1170"!Make this final field static too.(Èóè
+7
+java:S1170"!Make this final field static too.(äº–
+c
+java:S1128"HRemove this unused import 'com.protas.movieapp.service.UserAuthService'.(»û¸Ìøÿÿÿÿ
