@@ -17,7 +17,7 @@ public class CinemaReadService {
         return cinemaRepository.findAll();
     }
 
-    public Cinema findById(Integer id) {
+    public Cinema findById(Long id) {
         return cinemaRepository.findById(id)
                 .orElseThrow(EntityNotFoundException::new);
     }

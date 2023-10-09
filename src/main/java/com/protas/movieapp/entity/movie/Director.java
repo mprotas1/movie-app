@@ -5,7 +5,7 @@ import lombok.Data;
 
 import java.util.List;
 
-@Entity
+@Entity(name = "director")
 @Data
 public class Director {
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)

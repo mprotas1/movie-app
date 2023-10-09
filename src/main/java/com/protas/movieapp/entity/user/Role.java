@@ -7,11 +7,15 @@ import lombok.Data;
 @Entity
 @Data
 public class Role {
-    @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Enumerated(EnumType.STRING)
+    @Enumerated(value = EnumType.STRING)
+    @Column(nullable = false)
     private RoleType roleType;
+
+    private User user;
 
     public Role withRoleType(RoleType roleType) {
         this.roleType = roleType;
