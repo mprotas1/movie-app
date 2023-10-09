@@ -20,6 +20,7 @@ public class Cinema {
     private Long id;
     private String name;
     @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @JoinColumn(name = "address_id", referencedColumnName = "id")
     private Address address;
     @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private List<ScreeningRoom> screeningRooms;
@@ -28,5 +29,12 @@ public class Cinema {
         this.name = name;
         this.address = address;
         this.screeningRooms = new ArrayList<>();
+    }
+
+    @PrePersist
+    public void checkAddressBeforePersisting() {
+        if(address != null) {
+
+        }
     }
 }
