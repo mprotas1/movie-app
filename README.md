@@ -1,5 +1,5 @@
 # Movie App
-The <b>Movie app</b> is an application build with REST architectural style in Java Spring Boot to allow users make cinema's specific purposes such as: 
+The <b>Movie app</b> is an application build with REST architectural style in Java Spring Boot to allow users perform cinema's specific actions such as: 
 * buying tickets as a simple user
 * build the cinema chain of individiual cinemas
 * creating/updating/deleting cinemas as a moderator/admin
