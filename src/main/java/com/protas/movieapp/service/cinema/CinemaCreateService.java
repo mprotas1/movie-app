@@ -21,14 +21,18 @@ public class CinemaCreateService {
     private final Logger logger = LoggerFactory.getLogger(CinemaCreateService.class.getName());
 
     public Cinema create(CinemaDTO cinema) {
+        throwExceptionIfAddressExists(cinema);
+        Cinema cinemaEntity = mapper.fromDTO(cinema);
+        logger.info("Creating the Cinema: {}...", cinemaEntity.getName());
+        return cinemaRepository.save(mapper.fromDTO(cinema));
+    }
+
+    private void throwExceptionIfAddressExists(CinemaDTO cinema) {
         Address address = cinema.address();
         if(addressService.addressAlreadyExists(address)) {
             logger.error("The Cinema cannot have duplicate address: {}", cinema.address());
             throw new AddressAlreadyExistsException("Cinema's address already exists!");
         }
-        Cinema cinemaEntity = mapper.fromDTO(cinema);
-        logger.info("Creating the Cinema: {}...", cinemaEntity.getName());
-        return cinemaRepository.save(mapper.fromDTO(cinema));
     }
 
 }
