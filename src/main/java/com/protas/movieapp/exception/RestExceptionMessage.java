@@ -8,6 +8,7 @@ import java.time.LocalDateTime;
 @Builder
 @Data
 public class RestExceptionMessage {
+    private String path;
     private String message;
-    private LocalDateTime dateTime = LocalDateTime.now();
+    private LocalDateTime dateTime;
 }

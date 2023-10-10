@@ -3,7 +3,6 @@ package com.protas.movieapp.entity.cinema;
 import com.protas.movieapp.entity.address.Address;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
-import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
