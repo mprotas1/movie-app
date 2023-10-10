@@ -31,10 +31,4 @@ public class Cinema {
         this.screeningRooms = new ArrayList<>();
     }
 
-    @PrePersist
-    public void checkAddressBeforePersisting() {
-        if(address != null) {
-
-        }
-    }
 }

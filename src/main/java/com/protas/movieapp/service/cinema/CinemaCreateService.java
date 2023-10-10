@@ -27,7 +27,7 @@ public class CinemaCreateService {
             throw new AddressAlreadyExistsException("Cinema's address already exists!");
         }
         Cinema cinemaEntity = mapper.fromDTO(cinema);
-        logger.info("Creating the Cinema with id: {} : {}...", cinemaEntity.getId(), cinemaEntity.getName());
+        logger.info("Creating the Cinema: {}...", cinemaEntity.getName());
         return cinemaRepository.save(mapper.fromDTO(cinema));
     }
 
