@@ -8,6 +8,9 @@ import com.protas.movieapp.service.cinema.CinemaReadService;
 import com.protas.movieapp.service.cinema.CinemaUpdateService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.web.PageableDefault;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -24,8 +27,9 @@ public class CinemaController {
     private final CinemaUpdateService updateService;
 
     @GetMapping
-    public ResponseEntity<List<Cinema>> findAll() {
-        return ResponseEntity.ok(readService.findAll());
+    public ResponseEntity<List<Cinema>> findAll(@PageableDefault(value = Integer.MAX_VALUE)
+                                                    Pageable pageable) {
+        return ResponseEntity.ok(readService.findAll(pageable));
     }
 
     @GetMapping("/{id}")

@@ -5,6 +5,7 @@ import com.protas.movieapp.repository.CinemaRepository;
 import jakarta.persistence.EntityNotFoundException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
@@ -19,8 +20,8 @@ public class CinemaReadService {
         return cinemaRepository.findAll();
     }
 
-    public Page<Cinema> findAll(Pageable pageable) {
-        return cinemaRepository.findAll(pageable);
+    public List<Cinema> findAll(Pageable pageable) {
+        return cinemaRepository.findAll(pageable).getContent();
     }
 
     public Cinema findById(Long id) {
