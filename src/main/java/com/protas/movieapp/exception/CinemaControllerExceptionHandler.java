@@ -13,7 +13,7 @@ import java.time.LocalDateTime;
 @RestControllerAdvice
 public class CinemaControllerExceptionHandler extends ResponseEntityExceptionHandler {
 
-    @ExceptionHandler(value = { AddressAlreadyExistsException.class, EntityNotFoundException.class })
+    @ExceptionHandler(value = { EntityAlreadyExistsException.class, EntityNotFoundException.class })
     protected ResponseEntity<RestExceptionMessage> handleAddressAlreadyExists(RuntimeException ex,
                                                                               WebRequest request) {
         RestExceptionMessage response = RestExceptionMessage.builder()

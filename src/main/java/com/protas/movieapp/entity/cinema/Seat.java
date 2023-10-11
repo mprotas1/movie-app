@@ -6,12 +6,9 @@ import lombok.Data;
 @Entity(name = "seat")
 @Data
 public class Seat {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    private Integer rowNumber;
-    private Integer columnNumber;
-    private Boolean isOccupied;
-    @ManyToOne
-    private ScreeningRoom screeningRoom;
+    private Integer seatRowNumber;
+    private Integer seatColumnNumber;
+    private boolean isOccupied;
 }

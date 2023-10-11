@@ -29,7 +29,8 @@ public class CinemaController {
     @GetMapping
     public ResponseEntity<List<Cinema>> findAll(@PageableDefault(value = Integer.MAX_VALUE)
                                                     Pageable pageable) {
-        return ResponseEntity.ok(readService.findAll(pageable));
+        List<Cinema> cinemas = readService.findAll(pageable);
+        return ResponseEntity.ok(cinemas);
     }
 
     @GetMapping("/{id}")

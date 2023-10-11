@@ -26,7 +26,7 @@ public class CinemaReadService {
 
     public Cinema findById(Long id) {
         return cinemaRepository.findById(id)
-                .orElseThrow(EntityNotFoundException::new);
+                .orElseThrow(() -> new EntityNotFoundException(String.format("Could not find the cinema with id: %d", id)));
     }
 
 }

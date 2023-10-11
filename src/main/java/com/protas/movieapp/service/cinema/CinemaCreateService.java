@@ -3,7 +3,7 @@ package com.protas.movieapp.service.cinema;
 import com.protas.movieapp.dto.CinemaDTO;
 import com.protas.movieapp.entity.address.Address;
 import com.protas.movieapp.entity.cinema.Cinema;
-import com.protas.movieapp.exception.AddressAlreadyExistsException;
+import com.protas.movieapp.exception.EntityAlreadyExistsException;
 import com.protas.movieapp.mapper.CinemaMapper;
 import com.protas.movieapp.repository.CinemaRepository;
 import com.protas.movieapp.service.address.AddressReadService;
@@ -31,7 +31,7 @@ public class CinemaCreateService {
         Address address = cinema.address();
         if(addressService.addressAlreadyExists(address)) {
             logger.error("The Cinema cannot have duplicate address: {}", cinema.address());
-            throw new AddressAlreadyExistsException("Cinema's address already exists!");
+            throw new EntityAlreadyExistsException("Cinema's address already exists!");
         }
     }
 
