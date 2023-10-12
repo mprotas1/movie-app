@@ -9,6 +9,7 @@ import jakarta.servlet.http.HttpServletResponse;
 import lombok.RequiredArgsConstructor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.lang.NonNull;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -24,8 +25,10 @@ import java.io.IOException;
 @RequiredArgsConstructor
 public class JwtAuthenticationFilter extends OncePerRequestFilter {
     private final Logger logger = LoggerFactory.getLogger(JwtAuthenticationFilter.class.getName());
-    private final String AUTH_HEADER = "Authorization";
-    private final String BEARER_PREFIX = "Bearer ";
+    @Value(value = "${movieapp.jwt.authorization}")
+    private String AUTH_HEADER = "Authorization";
+    @Value(value = "${movieapp.jwt.bearer}")
+    private String BEARER_PREFIX;
     private final JwtUtils jwtUtils;
     private final UserDetailsService userAuthService;
     @Override

@@ -1,20 +1,15 @@
 package com.protas.movieapp.service.room;
 
 import com.protas.movieapp.dto.ScreeningRoomDTO;
-import com.protas.movieapp.entity.address.Address;
 import com.protas.movieapp.entity.cinema.Cinema;
 import com.protas.movieapp.entity.cinema.ScreeningRoom;
-import com.protas.movieapp.entity.cinema.Seat;
 import com.protas.movieapp.exception.EntityAlreadyExistsException;
-import com.protas.movieapp.repository.CinemaRepository;
 import com.protas.movieapp.repository.ScreeningRoomRepository;
 import com.protas.movieapp.service.cinema.CinemaReadService;
 import lombok.RequiredArgsConstructor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
-
-import java.util.HashSet;
 
 @Service
 @RequiredArgsConstructor

@@ -5,9 +5,9 @@ import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
 import io.jsonwebtoken.io.Decoders;
 import io.jsonwebtoken.security.Keys;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Component;
-import org.springframework.stereotype.Service;
 
 import java.security.Key;
 import java.util.Date;
@@ -17,7 +17,10 @@ import java.util.function.Function;
 
 @Component
 public class JwtUtils {
-    private final String ENCRYPTION_KEY = "WVnKc0EwuPTjTzp1UfExojGyh37+bMnV6OWs3ffB5kAvt0w72ZR3cygIsQJx6IPm\n";
+    @Value(value = "${movieapp.jwt.secretkey}")
+    private String ENCRYPTION_KEY;
+    @Value(value = "${movieapp.jwt.expirationtime}")
+    private Integer EXPIRATION;
 
     public String generateToken(UserDetails userDetails) {
         return generateToken(new HashMap<>(), userDetails);
@@ -28,7 +31,7 @@ public class JwtUtils {
                 .setClaims(claims)
                 .setSubject(userDetails.getUsername())
                 .setIssuedAt(new Date(System.currentTimeMillis()))
-                .setExpiration(new Date(System.currentTimeMillis() + 1000 * 60 * 24))
+                .setExpiration(new Date(System.currentTimeMillis() + EXPIRATION))
                 .signWith(getSigningKey(), SignatureAlgorithm.HS256)
                 .compact();
     }
