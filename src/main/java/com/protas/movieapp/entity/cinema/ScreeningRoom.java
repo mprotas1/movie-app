@@ -13,7 +13,7 @@ public class ScreeningRoom {
     private Integer id;
     private Integer screeningRoomNumber;
 
-    @ManyToOne(optional = true)
+    @ManyToOne
     @JoinColumn(name = "cinema_id", nullable = false)
     @JsonIgnore
     private Cinema cinema;
@@ -25,5 +25,13 @@ public class ScreeningRoom {
     public ScreeningRoom(Integer screeningRoomNumber, Cinema cinema) {
         this.screeningRoomNumber = screeningRoomNumber;
         this.cinema = cinema;
+    }
+
+    @Override
+    public String toString() {
+        return "ScreeningRoom{" +
+                "id=" + id +
+                ", screeningRoomNumber=" + screeningRoomNumber +
+                '}';
     }
 }

@@ -11,4 +11,6 @@ import java.util.Optional;
 public interface ScreeningRoomRepository extends JpaRepository<ScreeningRoom, Integer> {
     Optional<List<ScreeningRoom>> findByCinemaId(Long cinemaId);
     Optional<ScreeningRoom> findByScreeningRoomNumberAndCinemaId(Integer screeningRoomNumber, Long cinemaId);
+    void deleteByIdAndCinemaId(Long id, Long cinemaId);
+    Optional<ScreeningRoom> findByIdAndCinemaId(Integer roomId, Long cinemaId);
 }

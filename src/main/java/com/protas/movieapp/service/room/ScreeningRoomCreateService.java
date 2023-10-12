@@ -43,6 +43,7 @@ public class ScreeningRoomCreateService {
     }
 
     private boolean screeningRoomAlreadyExists(ScreeningRoomDTO dto, Long cinemaId) {
-        return repository.findByScreeningRoomNumberAndCinemaId(dto.screeningRoomNumber(), cinemaId).isPresent();
+        return repository.findByScreeningRoomNumberAndCinemaId(dto.screeningRoomNumber(), cinemaId)
+                .isPresent();
     }
 }
