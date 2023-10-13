@@ -26,7 +26,7 @@ import java.io.IOException;
 public class JwtAuthenticationFilter extends OncePerRequestFilter {
     private final Logger logger = LoggerFactory.getLogger(JwtAuthenticationFilter.class.getName());
     @Value(value = "${movieapp.jwt.authorization}")
-    private String AUTH_HEADER = "Authorization";
+    private String AUTH_HEADER;
     @Value(value = "${movieapp.jwt.bearer}")
     private String BEARER_PREFIX;
     private final JwtUtils jwtUtils;
