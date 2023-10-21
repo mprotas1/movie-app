@@ -4,6 +4,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.protas.movieapp.entity.cinema.Seat;
 import com.protas.movieapp.mapper.SeatMapper;
 import com.protas.movieapp.model.RoomSize;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import java.io.File;
@@ -29,17 +30,29 @@ public class JsonSeatLoader extends AbstractSeatLoader {
                 .toList();
     }
 
+    @Override
+    public List<Seat> loadSeats(RoomSize roomSize) {
+        return readSeatsBySize(roomSize).stream()
+                .map(SeatMapper::fromJson)
+                .toList();
+    }
+
     private List<SeatData> readSeatsBySize() {
         String path = getPathFromRoomSize(this.getRoomSize());
         return fetchDataFromJsonFile(path);
     }
 
+    private List<SeatData> readSeatsBySize(RoomSize roomSize) {
+        String path = getPathFromRoomSize(roomSize);
+        return fetchDataFromJsonFile(path);
+    }
+
     private String getPathFromRoomSize(RoomSize roomSize) {
         String result = "";
-        switch (roomSize){
+        switch (roomSize) {
             case SMALL -> result = PATH_PREFIX + "room-small.json";
             case MEDIUM -> result = PATH_PREFIX + "room-medium.json";
-            case BIG -> result = PATH_PREFIX + "room-medium.json";
+            case BIG -> result = PATH_PREFIX + "room-big.json";
         }
 
         return result;
@@ -55,5 +68,4 @@ public class JsonSeatLoader extends AbstractSeatLoader {
 
         return Collections.emptyList();
     }
-
 }

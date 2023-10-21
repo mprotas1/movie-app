@@ -1,4 +1,4 @@
-package com.protas.movieapp.service;
+package com.protas.movieapp.service.auth;
 
 import com.protas.movieapp.dto.AuthenticationRequestDTO;
 import com.protas.movieapp.dto.RegisterRequestDTO;

@@ -38,4 +38,10 @@ class JsonSeatLoaderTest {
         assertNotNull(seats);
     }
 
+    @Test
+    void shouldLoadAllScreeningRoomSeats() {
+        var seats = seatLoader.loadSeats();
+        assertEquals(seats.size(), 50);
+    }
+
 }

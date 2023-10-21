@@ -2,7 +2,7 @@ package com.protas.movieapp.controller;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.protas.movieapp.controller.auth.AuthenticationController;
-import com.protas.movieapp.service.UserAuthService;
+import com.protas.movieapp.service.auth.UserAuthService;
 import com.protas.movieapp.utils.JwtUtils;
 import org.json.JSONObject;
 import org.junit.jupiter.api.DisplayName;

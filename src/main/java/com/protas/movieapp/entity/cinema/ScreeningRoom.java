@@ -1,10 +1,13 @@
 package com.protas.movieapp.entity.cinema;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.protas.movieapp.dto.ScreeningRoomDTO;
 import com.protas.movieapp.model.RoomSize;
 import jakarta.persistence.*;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+
+import java.util.List;
 
 @Entity(name = "screening_room")
 @Data
@@ -18,12 +21,19 @@ public class ScreeningRoom {
     private RoomSize roomSize;
 
     @ManyToOne
-    @JoinColumn(name = "cinema_id", nullable = false)
+    @JoinColumn(name = "cinema_id",
+            nullable = false)
     @JsonIgnore
     private Cinema cinema;
 
-    public ScreeningRoom(Integer screeningRoomNumber, Cinema cinema) {
-        this.screeningRoomNumber = screeningRoomNumber;
+    @OneToMany(cascade = CascadeType.ALL,
+            fetch = FetchType.LAZY)
+    @JsonIgnore
+    private List<Seat> seats;
+
+    public ScreeningRoom(ScreeningRoomDTO dto, Cinema cinema) {
+        this.screeningRoomNumber = dto.screeningRoomNumber();
+        this.roomSize = dto.size();
         this.cinema = cinema;
     }
 

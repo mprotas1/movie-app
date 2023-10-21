@@ -38,5 +38,4 @@ public class Cinema {
             screeningRooms = new ArrayList<>();
         screeningRooms.add(room);
     }
-
 }
