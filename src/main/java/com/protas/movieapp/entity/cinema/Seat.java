@@ -12,7 +12,6 @@ public class Seat {
     private Long id;
     private Integer seatRowNumber;
     private Integer seatColumnNumber;
-    private boolean isOccupied;
 
     @Enumerated(EnumType.STRING)
     private SeatType seatType;
