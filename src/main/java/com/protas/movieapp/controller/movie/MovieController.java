@@ -19,7 +19,8 @@ public class MovieController {
 
     @GetMapping
     public ResponseEntity<List<Movie>> findAll() {
-        return ResponseEntity.ok(readService.findAll());
+        // TODO
+        return ResponseEntity.ok(null);
     }
 
     @GetMapping(value = "/{id}")

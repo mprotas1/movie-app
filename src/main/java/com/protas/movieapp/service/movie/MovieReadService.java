@@ -11,8 +11,6 @@ import org.springframework.stereotype.Service;
 public class MovieReadService {
     private final MovieRepository movieRepository;
 
-    public Page<>
-
     public Movie findById(Long id) {
         return movieRepository.findById(id)
                 .orElseThrow(EntityNotFoundException::new);
