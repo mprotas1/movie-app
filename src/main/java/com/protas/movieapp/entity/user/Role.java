@@ -15,8 +15,6 @@ public class Role {
     @Column(nullable = false)
     private RoleType roleType;
 
-    private User user;
-
     public Role withRoleType(RoleType roleType) {
         this.roleType = roleType;
         return this;

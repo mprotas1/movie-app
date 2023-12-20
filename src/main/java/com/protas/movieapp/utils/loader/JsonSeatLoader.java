@@ -16,7 +16,7 @@ import java.util.List;
 @Component
 public class JsonSeatLoader extends AbstractSeatLoader {
     private final String PATH_PREFIX = "src/main/resources/data/";
-    private ObjectMapper mapper;
+    private final ObjectMapper mapper;
 
     public JsonSeatLoader() {
         super();
@@ -63,9 +63,8 @@ public class JsonSeatLoader extends AbstractSeatLoader {
             SeatData[] seatDataArray = mapper.readValue(new File(path), SeatData[].class);
             return Arrays.asList(seatDataArray);
         } catch (IOException e) {
-            e.printStackTrace();
+            return Collections.emptyList();
         }
 
-        return Collections.emptyList();
     }
 }

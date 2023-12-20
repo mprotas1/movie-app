@@ -10,7 +10,7 @@ import java.util.List;
 
 @Getter
 @Setter
-public class AbstractSeatLoader implements SeatLoader {
+public abstract class AbstractSeatLoader implements SeatLoader {
     private RoomSize roomSize;
 
     public AbstractSeatLoader() {

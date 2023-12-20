@@ -3,12 +3,12 @@ package com.protas.movieapp.service.cinema;
 import com.protas.movieapp.dto.CinemaDTO;
 import com.protas.movieapp.entity.address.Address;
 import com.protas.movieapp.entity.cinema.Cinema;
+import com.protas.movieapp.exception.EntityAlreadyExistsException;
 import com.protas.movieapp.mapper.CinemaMapper;
 import com.protas.movieapp.repository.CinemaRepository;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import org.mockito.MockitoAnnotations;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
@@ -20,18 +20,17 @@ import static org.mockito.Mockito.*;
 @SpringBootTest
 @TestPropertySource(value = "/application-test.properties")
 public class CinemaCreateServiceTest {
-    @MockBean
-    private CinemaRepository cinemaRepository;
     @Autowired
     private CinemaMapper mapper;
     @Autowired
     private CinemaCreateService cinemaService;
+    @MockBean
+    private CinemaRepository cinemaRepository;
     private CinemaDTO exampleCinema;
     private Address exampleAddress;
 
     @BeforeEach
     void setUp() {
-        MockitoAnnotations.initMocks(this);
         exampleAddress = new Address();
         exampleAddress.setCity("Szczecin");
         exampleAddress.setStreet("Aleja Wyzwolenia");
@@ -51,9 +50,16 @@ public class CinemaCreateServiceTest {
         verify(cinemaRepository, times(1)).save(cinema);
     }
 
-    @Test
+    @Test()
     @DisplayName(value = "Should not create Cinema due to already existing Address")
     void shouldNotCreateCinemaDueToExistingAddress() {
+        Cinema cinema = mapper.fromDTO(exampleCinema);
+        when(cinemaRepository.save(cinema)).thenReturn(cinema);
+        Cinema createdCinema = cinemaService.create(exampleCinema);
 
+        when(cinemaRepository.save(cinema)).thenThrow(EntityAlreadyExistsException.class);
+        assertThrows(EntityAlreadyExistsException.class, () -> cinemaService.create(exampleCinema));
+
+        verify(cinemaRepository, times(2)).save(cinema);
     }
 }
