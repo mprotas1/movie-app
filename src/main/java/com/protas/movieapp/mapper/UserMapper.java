@@ -16,12 +16,6 @@ public class UserMapper {
 
     private final PasswordEncoder passwordEncoder;
 
-    public User registerRequestToUserEntity(RegisterRequestDTO registerRequest, List<Role> roles) {
-        User user = registerRequestToUserEntity(registerRequest);
-        user.setRoles(roles);
-        return user;
-    }
-
     public User registerRequestToUserEntity(RegisterRequestDTO registerRequest) {
         User user = new User();
         user.setEmail(registerRequest.email());

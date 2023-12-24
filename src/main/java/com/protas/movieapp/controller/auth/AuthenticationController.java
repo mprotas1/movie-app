@@ -30,9 +30,7 @@ public class AuthenticationController {
 
     @PostMapping("/authenticate")
     public ResponseEntity<AuthenticationResponse> authenticate(@RequestBody AuthenticationRequestDTO request) {
-        logger.info("Authentication request from /authenticate: {}", request);
         AuthenticationResponse authenticationResponse = userAuthService.authenticate(request);
-        logger.info("Authentication response from /authenticate: {}", authenticationResponse);
         return ResponseEntity.ok(authenticationResponse);
     }
 

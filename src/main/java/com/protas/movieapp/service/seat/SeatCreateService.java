@@ -3,7 +3,7 @@ package com.protas.movieapp.service.seat;
 import com.protas.movieapp.entity.cinema.Seat;
 import com.protas.movieapp.model.RoomSize;
 import com.protas.movieapp.repository.SeatRepository;
-import com.protas.movieapp.utils.loader.JsonSeatLoader;
+import com.protas.movieapp.utils.loader.json.JsonSeatLoader;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 

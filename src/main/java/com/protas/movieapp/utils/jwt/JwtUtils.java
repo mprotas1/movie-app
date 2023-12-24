@@ -1,4 +1,4 @@
-package com.protas.movieapp.utils;
+package com.protas.movieapp.utils.jwt;
 
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;

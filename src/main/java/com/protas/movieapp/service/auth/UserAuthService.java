@@ -6,7 +6,7 @@ import com.protas.movieapp.entity.user.User;
 import com.protas.movieapp.mapper.UserMapper;
 import com.protas.movieapp.model.AuthenticationResponse;
 import com.protas.movieapp.repository.UserRepository;
-import com.protas.movieapp.utils.JwtUtils;
+import com.protas.movieapp.utils.jwt.JwtUtils;
 import lombok.RequiredArgsConstructor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

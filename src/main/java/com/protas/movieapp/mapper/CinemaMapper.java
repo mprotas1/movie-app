@@ -8,7 +8,10 @@ import org.springframework.stereotype.Component;
 public class CinemaMapper {
 
     public Cinema fromDTO(CinemaDTO cinemaDTO) {
-        return new Cinema(cinemaDTO.name(), cinemaDTO.address());
+        return Cinema.builder()
+                .withName(cinemaDTO.name())
+                .withAddress(cinemaDTO.address())
+                .buildValidCinema();
     }
 
     public CinemaDTO toDTO(Cinema cinema) {

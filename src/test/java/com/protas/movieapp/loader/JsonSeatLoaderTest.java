@@ -2,25 +2,22 @@ package com.protas.movieapp.loader;
 
 import com.protas.movieapp.model.RoomSize;
 import com.protas.movieapp.utils.loader.AbstractSeatLoader;
-import com.protas.movieapp.utils.loader.JsonSeatLoader;
+import com.protas.movieapp.utils.loader.json.JsonSeatLoader;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.*;
 
 class JsonSeatLoaderTest {
-    String filePath;
     AbstractSeatLoader seatLoader;
 
     @BeforeEach
     void setUp() {
-        filePath = "src/main/resources/data/";
         seatLoader = new JsonSeatLoader();
     }
 
     @Test
-    void shouldHaveSmallSizeDefault() {
+    void shouldHaveSmallSizeByDefault() {
         var check = seatLoader.getRoomSize();
         assertEquals(RoomSize.SMALL, check);
     }
@@ -29,18 +26,31 @@ class JsonSeatLoaderTest {
     void shouldLoadSmallScreeningRoom() {
         var seats = seatLoader.loadSeats();
         assertNotNull(seats);
+        assertFalse(seats.isEmpty());
     }
 
     @Test
     void shouldLoadMediumScreeningRoom() {
-        seatLoader = new JsonSeatLoader().withRoomSize(RoomSize.MEDIUM);
+        seatLoader.setRoomSize(RoomSize.MEDIUM);
         var seats = seatLoader.loadSeats();
         assertNotNull(seats);
+        assertFalse(seats.isEmpty());
+        assertEquals(RoomSize.MEDIUM, seatLoader.getRoomSize());
+    }
+
+    @Test
+    void shouldLoadBigScreeningRoom() {
+        seatLoader.setRoomSize(RoomSize.BIG);
+        var seats = seatLoader.loadSeats();
+        assertNotNull(seats);
+        assertFalse(seats.isEmpty());
+        assertEquals(RoomSize.BIG, seatLoader.getRoomSize());
     }
 
     @Test
     void shouldLoadAllScreeningRoomSeats() {
         var seats = seatLoader.loadSeats();
+        assertFalse(seats.isEmpty());
         assertEquals(seats.size(), 50);
     }
 

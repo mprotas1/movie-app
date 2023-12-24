@@ -1,5 +1,6 @@
 package com.protas.movieapp.entity.address;
 
+import io.micrometer.common.util.StringUtils;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -32,5 +33,9 @@ public class Address {
         @Override
         public int hashCode() {
                 return Objects.hash(city, street, addressNumber);
+        }
+
+        public boolean isValidAddress() {
+                return StringUtils.isNotBlank(city) && StringUtils.isNotBlank(street) && addressNumber >= 1;
         }
 }

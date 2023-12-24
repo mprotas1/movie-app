@@ -1,5 +1,6 @@
 package com.protas.movieapp.entity.user;
 
+import com.protas.movieapp.builder.UserBuilder;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
@@ -87,4 +88,7 @@ public class User implements UserDetails {
         return true;
     }
 
+    public static UserBuilder builder() {
+        return new UserBuilder();
+    }
 }

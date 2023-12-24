@@ -1,6 +1,7 @@
 package com.protas.movieapp.entity.cinema;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.protas.movieapp.builder.CinemaBuilder;
 import com.protas.movieapp.entity.address.Address;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
@@ -18,10 +19,13 @@ public class Cinema {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
     private String name;
+
     @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     @JoinColumn(name = "address_id", referencedColumnName = "id")
     private Address address;
+
     @OneToMany(cascade = CascadeType.ALL,
             fetch = FetchType.LAZY,
             orphanRemoval = true)
@@ -37,5 +41,9 @@ public class Cinema {
         if(screeningRooms == null)
             screeningRooms = new ArrayList<>();
         screeningRooms.add(room);
+    }
+
+    public static CinemaBuilder builder() {
+        return new CinemaBuilder();
     }
 }

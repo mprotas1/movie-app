@@ -1,6 +1,6 @@
 package com.protas.movieapp.filter;
 
-import com.protas.movieapp.utils.JwtUtils;
+import com.protas.movieapp.utils.jwt.JwtUtils;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
