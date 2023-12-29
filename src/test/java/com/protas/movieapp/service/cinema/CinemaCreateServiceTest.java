@@ -9,6 +9,7 @@ import com.protas.movieapp.repository.CinemaRepository;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import org.mockito.Mockito;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
@@ -42,7 +43,7 @@ public class CinemaCreateServiceTest {
     @DisplayName(value = "Should create Cinema with all data correct")
     void shouldCreateCinemaWithDataCorrect() {
         Cinema cinema = mapper.fromDTO(exampleCinema);
-        when(cinemaRepository.save(cinema))
+        when(cinemaRepository.save(Mockito.any(Cinema.class)))
                 .thenReturn(cinema);
         Cinema createdCinema = cinemaService.create(exampleCinema);
         assertNotNull(createdCinema);
