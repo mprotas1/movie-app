@@ -37,12 +37,6 @@ public class Cinema {
         this.address = address;
     }
 
-    public void addScreeningRoom(ScreeningRoom room) {
-        if(screeningRooms == null)
-            screeningRooms = new ArrayList<>();
-        screeningRooms.add(room);
-    }
-
     public static CinemaBuilder builder() {
         return new CinemaBuilder();
     }

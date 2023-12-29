@@ -1,5 +1,6 @@
 package com.protas.movieapp.entity.address;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import io.micrometer.common.util.StringUtils;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
@@ -21,7 +22,7 @@ public class Address {
         Integer addressNumber;
 
         @Override
-        public boolean equals(java.lang.Object o) {
+        public boolean equals(Object o) {
                 if (this == o) return true;
                 if (o == null || getClass() != o.getClass()) return false;
                 Address address = (Address) o;
@@ -35,6 +36,8 @@ public class Address {
                 return Objects.hash(city, street, addressNumber);
         }
 
+
+        @JsonIgnore
         public boolean isValidAddress() {
                 return StringUtils.isNotBlank(city) && StringUtils.isNotBlank(street) && addressNumber >= 1;
         }

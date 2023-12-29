@@ -37,7 +37,7 @@ public class ScreeningRoomCreateService {
 
     private ScreeningRoom createRoomAndAddToCinema(ScreeningRoomDTO dto, Cinema cinema) {
         ScreeningRoom room = new ScreeningRoom(dto, cinema);
-        cinema.addScreeningRoom(room);
+        //cinema.addScreeningRoom(room);
         setRoomSeats(room);
         return repository.save(room);
     }
@@ -49,7 +49,8 @@ public class ScreeningRoomCreateService {
     }
 
     private boolean screeningRoomAlreadyExists(ScreeningRoomDTO dto, Long cinemaId) {
-        return repository.findByScreeningRoomNumberAndCinemaId(dto.screeningRoomNumber(), cinemaId)
+        return repository
+                .findByScreeningRoomNumberAndCinemaId(dto.screeningRoomNumber(), cinemaId)
                 .isPresent();
     }
 }

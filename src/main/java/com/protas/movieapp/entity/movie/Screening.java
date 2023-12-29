@@ -3,6 +3,7 @@ package com.protas.movieapp.entity.movie;
 import com.protas.movieapp.entity.cinema.ScreeningRoom;
 import jakarta.persistence.*;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
@@ -10,6 +11,7 @@ import java.util.List;
 
 @Entity(name = "screening")
 @Data
+@NoArgsConstructor
 public class Screening {
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
@@ -25,10 +27,6 @@ public class Screening {
             joinColumns = @JoinColumn(name = "screening_id"),
             inverseJoinColumns = @JoinColumn(name = "screening_room_id"))
     private List<ScreeningRoom> screeningRooms = new ArrayList<>();
-
-    public Screening() {
-
-    }
 
     public Screening(Movie movie, LocalDateTime startTime) {
         this.contextMovie = movie;

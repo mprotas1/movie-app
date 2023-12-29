@@ -37,12 +37,4 @@ public class ScreeningRoom {
         this.cinema = cinema;
     }
 
-    @Override
-    public String toString() {
-        return "ScreeningRoom{" +
-                "id=" + id +
-                ", screeningRoomNumber=" + screeningRoomNumber +
-                ", roomSize=" + roomSize.toString() +
-                '}';
-    }
 }

@@ -14,6 +14,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
 @Service
+@Transactional
 @RequiredArgsConstructor
 public class CinemaCreateService {
     private final CinemaMapper mapper;
@@ -21,12 +22,11 @@ public class CinemaCreateService {
     private final CinemaRepository cinemaRepository;
     private final Logger logger = LoggerFactory.getLogger(CinemaCreateService.class.getName());
 
-    @Transactional
     public Cinema create(CinemaDTO cinema) {
         throwExceptionIfAddressExists(cinema);
         Cinema cinemaEntity = mapper.fromDTO(cinema);
         logger.info("Creating the Cinema: {}...", cinemaEntity.getName());
-        return cinemaRepository.save(mapper.fromDTO(cinema));
+        return cinemaRepository.save(cinemaEntity);
     }
 
     private void throwExceptionIfAddressExists(CinemaDTO cinema) throws EntityAlreadyExistsException {

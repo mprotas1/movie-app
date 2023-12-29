@@ -16,10 +16,6 @@ import java.util.List;
 public class CinemaReadService {
     private final CinemaRepository cinemaRepository;
 
-    public List<Cinema> findAll() {
-        return cinemaRepository.findAll();
-    }
-
     public List<Cinema> findAll(Pageable pageable) {
         return cinemaRepository.findAll(pageable).getContent();
     }

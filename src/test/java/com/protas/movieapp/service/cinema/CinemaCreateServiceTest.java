@@ -50,12 +50,12 @@ public class CinemaCreateServiceTest {
         verify(cinemaRepository, times(1)).save(cinema);
     }
 
-    @Test()
+    @Test
     @DisplayName(value = "Should not create Cinema due to already existing Address")
     void shouldNotCreateCinemaDueToExistingAddress() {
         Cinema cinema = mapper.fromDTO(exampleCinema);
         when(cinemaRepository.save(cinema)).thenReturn(cinema);
-        Cinema createdCinema = cinemaService.create(exampleCinema);
+        cinemaService.create(exampleCinema);
 
         when(cinemaRepository.save(cinema)).thenThrow(EntityAlreadyExistsException.class);
         assertThrows(EntityAlreadyExistsException.class, () -> cinemaService.create(exampleCinema));
