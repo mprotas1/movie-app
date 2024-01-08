@@ -17,10 +17,6 @@ public abstract class AbstractSeatLoader implements SeatLoader {
         this.roomSize = RoomSize.SMALL;
     }
 
-    public AbstractSeatLoader(RoomSize roomSize) {
-        this.roomSize = roomSize;
-    }
-
     @Override
     public List<Seat> loadSeats() {
         return Collections.emptyList();

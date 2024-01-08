@@ -14,19 +14,18 @@ import java.util.List;
 @NoArgsConstructor
 public class Screening {
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id;
+    private Long id;
 
-    @OneToOne(fetch = FetchType.EAGER)
+    @OneToOne
+    @JoinColumn(name = "context_movie_id")
     private Movie contextMovie;
 
     private LocalDateTime startTime;
     private LocalDateTime endTime;
 
-    @ManyToMany
-    @JoinTable(name = "screening_screening_room",
-            joinColumns = @JoinColumn(name = "screening_id"),
-            inverseJoinColumns = @JoinColumn(name = "screening_room_id"))
-    private List<ScreeningRoom> screeningRooms = new ArrayList<>();
+    @ManyToOne
+    @JoinColumn(name = "screening_room_id")
+    private ScreeningRoom screeningRoom;
 
     public Screening(Movie movie, LocalDateTime startTime) {
         this.contextMovie = movie;
@@ -39,4 +38,5 @@ public class Screening {
         var resultTime = startTime.plusMinutes((long) duration);
         setEndTime(resultTime);
     }
+
 }

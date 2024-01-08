@@ -1,10 +1,14 @@
 package com.protas.movieapp.entity.cinema;
 
+import com.protas.movieapp.entity.reservation.Reservation;
 import com.protas.movieapp.model.SeatType;
 import jakarta.persistence.*;
 import lombok.Data;
 
-@Entity(name = "seat")
+import java.util.ArrayList;
+import java.util.List;
+
+@Entity
 @Data
 public class Seat {
     @Id
@@ -16,7 +20,10 @@ public class Seat {
     @Enumerated(EnumType.STRING)
     private SeatType seatType;
 
-    @ManyToOne(targetEntity = ScreeningRoom.class)
+    @ManyToOne
     @JoinColumn(name = "room_id", referencedColumnName = "id")
     private ScreeningRoom room;
+
+    @OneToMany(fetch = FetchType.LAZY)
+    private List<Reservation> reservations = new ArrayList<>();
 }

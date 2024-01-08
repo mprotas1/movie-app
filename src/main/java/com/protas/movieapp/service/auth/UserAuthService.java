@@ -7,13 +7,17 @@ import com.protas.movieapp.mapper.UserMapper;
 import com.protas.movieapp.model.AuthenticationResponse;
 import com.protas.movieapp.repository.UserRepository;
 import com.protas.movieapp.utils.jwt.JwtUtils;
+import jakarta.persistence.EntityNotFoundException;
 import lombok.RequiredArgsConstructor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
 
+import java.security.Principal;
 import java.util.Optional;
 
 @Service
@@ -45,6 +49,11 @@ public class UserAuthService {
         String token = jwtUtils.generateToken(user.get());
         logger.info("Successfully authenticated user: {} with id: {}", request.email(), user.get().getId());
         return new AuthenticationResponse(token);
+    }
+
+    public User getUserFromAuthentication(Authentication authentication) {
+        Principal principal = (Principal) authentication.getPrincipal();
+        return userRepository.findByEmail(principal.getName()).orElseThrow(EntityNotFoundException::new);
     }
 
 }
