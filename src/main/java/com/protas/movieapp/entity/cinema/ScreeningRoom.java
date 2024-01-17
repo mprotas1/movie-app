@@ -38,7 +38,7 @@ public class ScreeningRoom {
     @JoinTable(name = "screening_screening_room",
             joinColumns = @JoinColumn(name = "screening_id"),
             inverseJoinColumns = @JoinColumn(name = "screening_room_id"))
-    private List<Screening> screenings = new ArrayList<>();
+    private List<Screening> screenings;
 
     public ScreeningRoom(ScreeningRoomDTO dto, Cinema cinema) {
         this.screeningRoomNumber = dto.screeningRoomNumber();

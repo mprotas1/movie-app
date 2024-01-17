@@ -8,7 +8,7 @@ import com.protas.movieapp.entity.user.User;
 import com.protas.movieapp.mapper.ReservationMapper;
 import com.protas.movieapp.repository.ReservationRepository;
 import com.protas.movieapp.service.seat.SeatReadService;
-import com.protas.movieapp.service.service.ScreeningReadService;
+import com.protas.movieapp.service.screening.ScreeningReadService;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;

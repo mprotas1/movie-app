@@ -1,25 +1,28 @@
 package com.protas.movieapp.entity.movie;
 
 import com.protas.movieapp.entity.cinema.ScreeningRoom;
+import com.protas.movieapp.entity.reservation.Reservation;
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotNull;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.time.LocalDateTime;
-import java.util.ArrayList;
 import java.util.List;
 
-@Entity(name = "screening")
+@Entity
 @Data
 @NoArgsConstructor
 public class Screening {
-    @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @OneToOne
+    @ManyToOne
     @JoinColumn(name = "context_movie_id")
     private Movie contextMovie;
 
+    @NotNull
     private LocalDateTime startTime;
     private LocalDateTime endTime;
 
@@ -27,9 +30,13 @@ public class Screening {
     @JoinColumn(name = "screening_room_id")
     private ScreeningRoom screeningRoom;
 
-    public Screening(Movie movie, LocalDateTime startTime) {
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, orphanRemoval = true)
+    private List<Reservation> reservations;
+
+    public Screening(Movie movie, LocalDateTime startTime, ScreeningRoom room) {
         this.contextMovie = movie;
         this.startTime = startTime;
+        this.setScreeningRoom(room);
         setEndTimeByMovieDuration();
     }
 

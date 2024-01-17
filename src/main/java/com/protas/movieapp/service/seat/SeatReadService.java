@@ -19,12 +19,11 @@ public class SeatReadService {
     private final SeatRepository repository;
 
     public List<Seat> getAllRoomSeats(Long roomId) {
-        //return repository.findAllByRoomId(roomId);
-        return Collections.emptyList();
+        return repository.findAllByRoomId(roomId);
     }
 
     public Seat getSeatFromScreeningRoomAndSeatDTO(ScreeningRoom screeningRoom, SeatDTO seatDTO) {
-        return repository.findByScreeningRoomAndRowAndColumn(screeningRoom.getId(), seatDTO.row(), seatDTO.column())
+        return repository.findByRoomIdAndSeatRowNumberAndSeatColumnNumber(screeningRoom.getId(), seatDTO.row(), seatDTO.column())
                 .orElseThrow(EntityNotFoundException::new);
     }
 }

@@ -21,8 +21,8 @@ public class Reservation {
     @JoinColumn(name = "customer_id", referencedColumnName = "id", nullable = false)
     private User customer;
 
-    @OneToOne
-    @JoinColumn(name = "screening_id", nullable = false)
+    @ManyToOne
+    @JoinColumn(name = "screening_id", referencedColumnName = "id", nullable = false)
     private Screening movieScreening;
 
     @ManyToOne
