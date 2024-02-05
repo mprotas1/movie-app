@@ -23,10 +23,8 @@ public class ScreeningCreateService {
     public Screening create(ScreeningRequestDTO screeningRequestDTO,
                             Integer roomId) {
         return screeningRepository.save(ScreeningMapper.fromDTO(
-                getInternalDTOfromRequestDTO(screeningRequestDTO,
-                        roomId
-                )
-        ));
+                getInternalDTOfromRequestDTO(screeningRequestDTO, roomId))
+        );
     }
 
     public Screening create(MovieDTO movieDTO, Integer roomId) {

@@ -26,16 +26,13 @@ public class ReservationController {
     @PostMapping
     public ResponseEntity<ReservationDTO> doReservation(@PathVariable Long screeningId,
                                                         @RequestBody @Valid SeatDTO seatDTO) {
-        // Need a user
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         User currentUser = userService.getUserFromAuthentication(authentication);
 
         ReservationDTO reservationDTO = new ReservationDTO(screeningId, seatDTO);
 
-        LOGGER.info("Performing reservation for user: {}",
-                authentication.getPrincipal());
+        LOGGER.info("Performing reservation for user: {}", authentication.getPrincipal());
 
-        // Need to register his reservation
         ReservationDTO reservation = reservationCreateService.doReservation(reservationDTO, currentUser);
         return ResponseEntity.ok(reservation);
     }

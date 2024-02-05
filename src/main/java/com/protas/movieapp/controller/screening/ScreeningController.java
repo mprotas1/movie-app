@@ -18,7 +18,7 @@ public class ScreeningController {
     public ResponseEntity<Screening> create(@RequestBody ScreeningRequestDTO screeningRequestDTO,
                                             @PathVariable Integer roomId) {
         Screening savedScreening = screeningCreateService.create(screeningRequestDTO, roomId);
-        return ResponseEntity.ok(null);
+        return ResponseEntity.ok(savedScreening);
     }
 
 }

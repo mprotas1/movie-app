@@ -37,6 +37,8 @@ public class Screening {
         this.contextMovie = movie;
         this.startTime = startTime;
         this.setScreeningRoom(room);
+
+        // TODO: maybe should setEndTimeByMovieDuration during the @PrePersist event?
         setEndTimeByMovieDuration();
     }
 
