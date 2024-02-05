@@ -1,11 +1,12 @@
 package com.protas.movieapp.entity.movie;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.Data;
 
 import java.util.List;
 
-@Entity(name = "director")
+@Entity
 @Data
 public class Director {
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -13,5 +14,6 @@ public class Director {
     private String firstName;
     private String lastName;
     @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @JsonIgnore
     private List<Movie> movies;
 }
