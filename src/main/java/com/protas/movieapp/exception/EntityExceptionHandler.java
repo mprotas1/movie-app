@@ -11,7 +11,7 @@ import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExcep
 import java.time.LocalDateTime;
 
 @RestControllerAdvice
-public class CinemaControllerExceptionHandler extends ResponseEntityExceptionHandler {
+public class EntityExceptionHandler extends ResponseEntityExceptionHandler {
 
     @ExceptionHandler(value = { EntityAlreadyExistsException.class, EntityNotFoundException.class })
     protected ResponseEntity<RestExceptionMessage> handleAddressAlreadyExists(RuntimeException ex,

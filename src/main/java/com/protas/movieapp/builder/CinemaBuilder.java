@@ -19,8 +19,7 @@ public class CinemaBuilder {
     }
 
     public Cinema buildValidCinema() {
-        if(fieldsAreValid())
-            return new Cinema(name, address);
+        if(fieldsAreValid()) return new Cinema(name, address);
 
         // TODO: implement custom Exception to delegate on invalid input to builder
         throw new RuntimeException();
