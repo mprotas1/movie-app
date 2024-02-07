@@ -1,3 +1,9 @@
 package com.protas.movieapp.dto;
 
-public record DirectorDTO(String firstName, String lastName) { }
+import jakarta.validation.constraints.NotBlank;
+
+public record DirectorDTO(
+        @NotBlank
+        String firstName,
+        @NotBlank
+        String lastName) {}

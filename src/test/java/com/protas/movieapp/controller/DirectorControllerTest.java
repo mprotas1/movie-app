@@ -94,4 +94,19 @@ public class DirectorControllerTest extends TestContainerBase {
         assertNotNull(createdDirector);
     }
 
+    @Test
+    public void shouldNotCreateDirectorWithInappropriateData() throws Exception {
+        DirectorDTO dto = new DirectorDTO(null, "");
+        String jsonDto = objectMapper.writeValueAsString(dto);
+
+        var result = mockMvc.perform(post("/api/director")
+                .contentType(MediaType.APPLICATION_JSON)
+                .content(jsonDto))
+                .andExpect(status().isBadRequest())
+                .andReturn();
+
+        // TODO: expect RestExceptionMessage to be displayed
+        System.out.println(result.getResponse().getContentAsString());
+    }
+
 }

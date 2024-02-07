@@ -7,6 +7,7 @@ import com.protas.movieapp.service.director.DirectorCreateService;
 import com.protas.movieapp.service.director.DirectorDeleteService;
 import com.protas.movieapp.service.director.DirectorReadService;
 import com.protas.movieapp.service.director.DirectorUpdateService;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.web.PageableDefault;
@@ -26,7 +27,7 @@ public class DirectorController {
     private final DirectorDeleteService directorDeleteService;
 
     @PostMapping
-    public ResponseEntity<Director> create(DirectorDTO dto) {
+    public ResponseEntity<Director> create(@RequestBody @Valid DirectorDTO dto) {
         return ResponseEntity.status(HttpStatus.CREATED).body(directorCreateService.create(dto));
     }
 
@@ -41,12 +42,12 @@ public class DirectorController {
         return ResponseEntity.ok(directorReadService.findAll(pageable));
     }
 
-    @PutMapping
+    @PutMapping("/{id}")
     public ResponseEntity<Director> update(@PathVariable Long id, @RequestBody DirectorDTO dto) {
         return ResponseEntity.ok(directorUpdateService.update(id, dto));
     }
 
-    @DeleteMapping
+    @DeleteMapping("/{id}")
     public ResponseEntity<Void> delete(@PathVariable Long id) {
         directorDeleteService.delete(id);
         return ResponseEntity.noContent().build();
