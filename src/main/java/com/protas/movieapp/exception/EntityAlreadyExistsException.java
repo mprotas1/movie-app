@@ -5,7 +5,7 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 
 @ResponseStatus(code = HttpStatus.BAD_REQUEST, reason = "Entity already exists")
 public class EntityAlreadyExistsException extends RuntimeException {
-    private Object object;
+    private final Object object;
 
     public EntityAlreadyExistsException(Object object) {
         this.object = object;
@@ -15,7 +15,7 @@ public class EntityAlreadyExistsException extends RuntimeException {
     public String getMessage() {
         return object == null
                 ? super.getMessage()
-                : String.format("The object %s already exists, please provide new", object.toString());
+                : String.format("The object %s already exists, please provide new", object);
     }
 
 }

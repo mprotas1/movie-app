@@ -6,4 +6,5 @@ public record DirectorDTO(
         @NotBlank
         String firstName,
         @NotBlank
-        String lastName) {}
+        String lastName
+) {}

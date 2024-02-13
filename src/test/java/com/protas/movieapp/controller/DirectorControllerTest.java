@@ -3,6 +3,7 @@ package com.protas.movieapp.controller;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.protas.movieapp.dto.DirectorDTO;
 import com.protas.movieapp.entity.movie.Director;
+import com.protas.movieapp.exception.RestExceptionMessage;
 import com.protas.movieapp.repository.DirectorRepository;
 import com.protas.movieapp.service.director.DirectorCreateService;
 import com.protas.movieapp.testcontainers.TestContainerBase;
@@ -15,6 +16,7 @@ import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.http.MediaType;
 import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.test.web.servlet.MockMvc;
+import org.springframework.web.bind.MethodArgumentNotValidException;
 
 import java.util.Optional;
 
@@ -42,6 +44,8 @@ public class DirectorControllerTest extends TestContainerBase {
 
     private Director director;
 
+    private final String BASE_ENDPOINT = "/api/director";
+
     @BeforeEach
     public void setUp() {
         director = new Director();
@@ -55,7 +59,7 @@ public class DirectorControllerTest extends TestContainerBase {
         final Long directorId = 1L;
         when(repository.findById(directorId)).thenReturn(Optional.ofNullable(director));
 
-        var result = mockMvc.perform(get("/api/director/{id}", directorId))
+        var result = mockMvc.perform(get(BASE_ENDPOINT.concat("/{id}"), directorId))
                 .andExpect(status().isOk())
                 .andExpect(content().contentType(MediaType.APPLICATION_JSON))
                 .andExpect(jsonPath("$.id", is(Math.toIntExact(directorId))))
@@ -70,7 +74,7 @@ public class DirectorControllerTest extends TestContainerBase {
         final Long directorId = 999L;
         when(repository.findById(directorId)).thenThrow(new EntityNotFoundException());
 
-        var result = mockMvc.perform(get("/api/director/{id}", directorId))
+        var result = mockMvc.perform(get(BASE_ENDPOINT.concat("/{id}"), directorId))
                 .andExpect(status().isBadRequest())
                 .andExpect(content().contentType(MediaType.APPLICATION_JSON))
                 .andReturn();
@@ -81,10 +85,14 @@ public class DirectorControllerTest extends TestContainerBase {
     @Test
     public void shouldCreateDirectorWithProperData() throws Exception {
         DirectorDTO dto = new DirectorDTO("James", "Cameron");
+
         when(directorCreateService.create(dto)).thenReturn(director);
 
-        var result = mockMvc.perform(post("/api/director")
-                        .contentType(MediaType.APPLICATION_JSON))
+        System.out.println(objectMapper.writeValueAsString(dto));
+
+        var result = mockMvc.perform(post(BASE_ENDPOINT)
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content(objectMapper.writeValueAsString(dto)))
                 .andExpect(status().isCreated())
                 .andExpect(content().contentType(MediaType.APPLICATION_JSON))
                 .andExpect(jsonPath("$.id", is(Math.toIntExact(director.getId()))))
@@ -96,17 +104,19 @@ public class DirectorControllerTest extends TestContainerBase {
 
     @Test
     public void shouldNotCreateDirectorWithInappropriateData() throws Exception {
-        DirectorDTO dto = new DirectorDTO(null, "");
-        String jsonDto = objectMapper.writeValueAsString(dto);
+        String jsonDto = objectMapper.writeValueAsString(new DirectorDTO(null, ""));
 
-        var result = mockMvc.perform(post("/api/director")
-                .contentType(MediaType.APPLICATION_JSON)
-                .content(jsonDto))
+        var result = mockMvc.perform(post(BASE_ENDPOINT)
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content(jsonDto)
+                )
                 .andExpect(status().isBadRequest())
+                .andExpect(content().contentType(MediaType.APPLICATION_JSON))
                 .andReturn();
 
-        // TODO: expect RestExceptionMessage to be displayed
-        System.out.println(result.getResponse().getContentAsString());
-    }
+        Exception resolvedException = result.getResolvedException();
 
+        assertTrue(resolvedException instanceof MethodArgumentNotValidException);
+        assertDoesNotThrow(() -> objectMapper.readValue(result.getResponse().getContentAsString(), RestExceptionMessage.class));
+    }
 }
