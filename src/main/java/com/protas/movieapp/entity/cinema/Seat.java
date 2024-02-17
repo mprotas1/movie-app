@@ -1,5 +1,6 @@
 package com.protas.movieapp.entity.cinema;
 
+import com.protas.movieapp.dto.SeatDTO;
 import com.protas.movieapp.entity.reservation.Reservation;
 import com.protas.movieapp.model.SeatType;
 import jakarta.persistence.*;
@@ -7,6 +8,7 @@ import lombok.Data;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 @Entity
 @Data
@@ -30,4 +32,8 @@ public class Seat {
 
     @OneToMany(fetch = FetchType.LAZY)
     private List<Reservation> reservations = new ArrayList<>();
+
+    public boolean equalsDTO(SeatDTO seatDTO) {
+        return Objects.equals(seatDTO.row(), this.getSeatRowNumber()) && Objects.equals(seatDTO.column(), this.getSeatColumnNumber());
+    }
 }
