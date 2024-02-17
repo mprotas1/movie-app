@@ -5,6 +5,4 @@ import com.protas.movieapp.entity.movie.Movie;
 
 import java.time.LocalDateTime;
 
-public record ScreeningDTO(Movie movie, ScreeningRoom room, LocalDateTime startTime) {
-    
-}
+public record ScreeningDTO(Movie movie, ScreeningRoom room, LocalDateTime startTime) {}

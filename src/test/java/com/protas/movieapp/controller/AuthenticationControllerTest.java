@@ -14,15 +14,14 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mock;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.http.*;
-import org.springframework.security.test.context.support.WithAnonymousUser;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.MvcResult;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.Set;
 
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.ArgumentMatchers.anyString;
@@ -32,8 +31,6 @@ import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
-@AutoConfigureMockMvc
-@WithAnonymousUser
 public class AuthenticationControllerTest extends TestContainerBase {
 
     @Autowired
@@ -112,7 +109,7 @@ public class AuthenticationControllerTest extends TestContainerBase {
                 .andDo(print())
                 .andExpect(status().is4xxClientError())
                 .andExpect(result -> assertTrue(result.getResolvedException() instanceof MethodArgumentNotValidException))
-                .andExpect(jsonPath("$.errors[0].field").value("email")) // Oczekuj błędu w polu "email"
+                .andExpect(jsonPath("$.errors[0].field").value("email"))
                 .andExpect(jsonPath("$.errors[0].message").value("must be a well-formed email address"));
     }
 
@@ -159,7 +156,7 @@ public class AuthenticationControllerTest extends TestContainerBase {
         User temporaryUser = User.builder().withUsername("mprotas")
                 .withEmail("mprotas@gmail.com")
                 .withPassword("password")
-                .withRoles(List.of(new Role().withRoleType(RoleType.USER)))
+                .withRoles(Set.of(new Role().withRoleType(RoleType.USER)))
                 .build();
         when(userRepository.findByEmail(anyString())).thenReturn(Optional.ofNullable(temporaryUser));
 
