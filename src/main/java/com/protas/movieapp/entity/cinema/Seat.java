@@ -1,5 +1,6 @@
 package com.protas.movieapp.entity.cinema;
 
+import com.protas.movieapp.builder.SeatBuilder;
 import com.protas.movieapp.dto.SeatDTO;
 import com.protas.movieapp.entity.reservation.Reservation;
 import com.protas.movieapp.model.SeatType;
@@ -35,5 +36,9 @@ public class Seat {
 
     public boolean equalsDTO(SeatDTO seatDTO) {
         return Objects.equals(seatDTO.row(), this.getSeatRowNumber()) && Objects.equals(seatDTO.column(), this.getSeatColumnNumber());
+    }
+
+    public static SeatBuilder builder() {
+        return new SeatBuilder();
     }
 }

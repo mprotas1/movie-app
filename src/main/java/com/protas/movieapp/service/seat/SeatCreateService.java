@@ -28,12 +28,13 @@ public class SeatCreateService {
     public Seat createSeat(SeatDTO dto, SeatType seatType, Long screeningRoomId) {
         throwExceptionOnExistingSeat(dto, screeningRoomId);
         var room = screeningRoomReadService.findById(Math.toIntExact(screeningRoomId));
-        var seat = new Seat();
-        seat.setRoom(room);
-        seat.setSeatRowNumber(dto.row());
-        seat.setSeatColumnNumber(dto.column());
-        seat.setSeatType(seatType);
-        return seatRepository.save(seat);
+        return seatRepository.save(Seat.builder()
+                .withRow(dto.row())
+                .withColumn(dto.column())
+                .withSeatType(seatType)
+                .withScreeningRoom(room)
+                .build()
+        );
     }
 
     private void throwExceptionOnExistingSeat(SeatDTO dto, Long screeningRoomId) {
