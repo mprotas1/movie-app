@@ -4,12 +4,11 @@ import com.protas.movieapp.dto.SeatCreationDTO;
 import com.protas.movieapp.dto.SeatDTO;
 import com.protas.movieapp.entity.cinema.Seat;
 import com.protas.movieapp.service.seat.SeatCreateService;
-import lombok.RequiredArgsConstructor;
+
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
+import lombok.RequiredArgsConstructor;
 
 @RestController
 @RequestMapping("/api/room/{roomId}")
@@ -17,6 +16,7 @@ import org.springframework.web.bind.annotation.RestController;
 public class SeatController {
     private final SeatCreateService seatCreateService;
 
+    @PostMapping
     public ResponseEntity<Seat> createSeatInRoom(@RequestBody SeatCreationDTO seatCreationDTO,
                                                  @PathVariable Long roomId) {
         var seat = seatCreateService.createSeat(new SeatDTO(seatCreationDTO.row(),
@@ -25,5 +25,4 @@ public class SeatController {
                 roomId);
         return ResponseEntity.ok(seat);
     }
-
 }

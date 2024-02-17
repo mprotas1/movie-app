@@ -1,11 +1,13 @@
 package com.protas.movieapp.controller;
 
 import com.protas.movieapp.dto.SeatDTO;
+import com.protas.movieapp.entity.cinema.Seat;
 import com.protas.movieapp.repository.SeatRepository;
 import com.protas.movieapp.testcontainers.TestContainerBase;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
+import org.mockito.Mockito;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.web.servlet.MockMvc;
 
@@ -14,10 +16,8 @@ import static org.mockito.Mockito.when;
 public class SeatControllerTest extends TestContainerBase {
     @Autowired
     MockMvc mockMvc;
-
     @InjectMocks
     SeatRepository seatRepository;
-
     private SeatDTO validSeatDTO;
     private SeatDTO invalidSeatDTO;
 
@@ -29,7 +29,7 @@ public class SeatControllerTest extends TestContainerBase {
 
     @Test
     public void shouldCreateSeatInScreeningRoom() {
-        when(seatRepository.save(null)).thenReturn(null);
+        when(seatRepository.save(Mockito.any(Seat.class))).thenReturn(null);
 
     }
 

@@ -32,22 +32,16 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 public class AuthenticationControllerTest extends TestContainerBase {
-
     @Autowired
     MockMvc mockMvc;
-
     @Autowired
     JwtUtils jwtUtils;
-
     @Autowired
     ObjectMapper mapper;
-
     @Mock
     UserRepository userRepository;
-
     private JSONObject registerUserCredentialsJson;
     private JSONObject authenticateUserCredentialsJson;
-
     private final String REGISTER_ENDPOINT = "/api/auth/register";
     private final String AUTHENTICATION_ENDPOINT = "/api/auth/authenticate";
 
