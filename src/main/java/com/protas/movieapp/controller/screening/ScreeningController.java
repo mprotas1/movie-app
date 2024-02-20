@@ -14,7 +14,6 @@ import java.util.List;
 @RequestMapping(value = "/api/room/{roomId}/screening")
 @RequiredArgsConstructor
 public class ScreeningController {
-
     private final ScreeningCreateService screeningCreateService;
     private final ScreeningReadService screeningReadService;
 

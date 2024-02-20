@@ -2,10 +2,9 @@ package com.protas.movieapp.controller.movie;
 
 import com.protas.movieapp.dto.MovieDTO;
 import com.protas.movieapp.entity.movie.Movie;
-import com.protas.movieapp.service.MovieCreateService;
+import com.protas.movieapp.service.movie.MovieCreateService;
 import com.protas.movieapp.service.movie.MovieReadService;
 import lombok.RequiredArgsConstructor;
-import org.apache.coyote.Response;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.web.PageableDefault;
 import org.springframework.http.ResponseEntity;
