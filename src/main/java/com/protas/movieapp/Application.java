@@ -11,8 +11,6 @@ import java.time.LocalDateTime;
 
 @SpringBootApplication
 public class Application {
-	@Autowired
-	private ScreeningMapper mapper;
 
 	public static void main(String[] args) {
 		SpringApplication.run(Application.class, args);
