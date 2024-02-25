@@ -20,7 +20,6 @@ public class ScreeningCreateService {
     private final ScreeningRepository screeningRepository;
     private final ScreeningRoomReadService screeningRoomReadService;
     private final MovieReadService movieReadService;
-    private final ScreeningMapper screeningMapper = Mappers.getMapper(ScreeningMapper.class);
 
     public Screening create(ScreeningRequestDTO screeningRequestDTO, Integer roomId) {
         return screeningRepository.save(getScreeningFromScreeningRequestDTO(screeningRequestDTO, roomId));

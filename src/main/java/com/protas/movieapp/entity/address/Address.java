@@ -1,6 +1,7 @@
 package com.protas.movieapp.entity.address;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.protas.movieapp.builder.AddressBuilder;
 import io.micrometer.common.util.StringUtils;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
@@ -14,31 +15,35 @@ import java.util.Objects;
 @AllArgsConstructor
 @NoArgsConstructor
 public class Address {
-        @Id
-        @GeneratedValue(strategy = GenerationType.IDENTITY)
-        Long id;
-        String city;
-        String street;
-        Integer addressNumber;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    Long id;
+    String city;
+    String street;
+    Integer addressNumber;
 
-        @Override
-        public boolean equals(Object o) {
-                if (this == o) return true;
-                if (o == null || getClass() != o.getClass()) return false;
-                Address address = (Address) o;
-                return Objects.equals(city, address.city) &&
-                        Objects.equals(street, address.street) &&
-                        Objects.equals(addressNumber, address.addressNumber);
-        }
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Address address = (Address) o;
+        return Objects.equals(city, address.city) &&
+                Objects.equals(street, address.street) &&
+                Objects.equals(addressNumber, address.addressNumber);
+    }
 
-        @Override
-        public int hashCode() {
-                return Objects.hash(city, street, addressNumber);
-        }
+    @Override
+    public int hashCode() {
+        return Objects.hash(city, street, addressNumber);
+    }
 
 
-        @JsonIgnore
-        public boolean isValidAddress() {
-                return StringUtils.isNotBlank(city) && StringUtils.isNotBlank(street) && addressNumber >= 1;
-        }
+    @JsonIgnore
+    public boolean isValidAddress() {
+        return StringUtils.isNotBlank(city) && StringUtils.isNotBlank(street) && addressNumber >= 1;
+    }
+
+    public static AddressBuilder builder() {
+        return new AddressBuilder();
+    }
 }
