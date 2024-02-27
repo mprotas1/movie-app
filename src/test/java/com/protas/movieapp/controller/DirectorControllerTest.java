@@ -28,18 +28,13 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 public class DirectorControllerTest extends TestContainerBase {
     @Autowired
     MockMvc mockMvc;
-
     @MockBean
     DirectorRepository repository;
-
     @MockBean
     DirectorCreateService directorCreateService;
-
     @Autowired
     ObjectMapper objectMapper;
-
     private Director director;
-
     private final String BASE_ENDPOINT = "/api/director";
 
     @BeforeEach
@@ -82,19 +77,18 @@ public class DirectorControllerTest extends TestContainerBase {
     public void shouldCreateDirectorWithProperData() throws Exception {
         DirectorDTO dto = new DirectorDTO("James", "Cameron");
 
-        when(directorCreateService.create(dto)).thenReturn(director);
-
-        System.out.println(objectMapper.writeValueAsString(dto));
+        when(directorCreateService.create(dto)).thenReturn(dto);
 
         var result = mockMvc.perform(post(BASE_ENDPOINT)
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(objectMapper.writeValueAsString(dto)))
                 .andExpect(status().isCreated())
                 .andExpect(content().contentType(MediaType.APPLICATION_JSON))
-                .andExpect(jsonPath("$.id", is(Math.toIntExact(director.getId()))))
+                .andExpect(jsonPath("$.firstName", is("James")))
+                .andExpect(jsonPath("$.lastName", is("Cameron")))
                 .andReturn();
 
-        Director createdDirector = objectMapper.readValue(result.getResponse().getContentAsString(), Director.class);
+        DirectorDTO createdDirector = objectMapper.readValue(result.getResponse().getContentAsString(), DirectorDTO.class);
         assertNotNull(createdDirector);
     }
 

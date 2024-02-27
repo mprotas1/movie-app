@@ -27,7 +27,7 @@ public class DirectorController {
     private final DirectorDeleteService directorDeleteService;
 
     @PostMapping
-    public ResponseEntity<Director> create(@RequestBody @Valid DirectorDTO dto) {
+    public ResponseEntity<DirectorDTO> create(@RequestBody @Valid DirectorDTO dto) {
         return ResponseEntity.status(HttpStatus.CREATED).body(directorCreateService.create(dto));
     }
 
