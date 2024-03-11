@@ -1,6 +1,6 @@
 package com.protas.movieapp.utils.loader;
 
-import com.protas.movieapp.model.SeatType;
+import com.protas.movieapp.seat.SeatType;
 
 public record SeatData(
     Integer rowNumber,

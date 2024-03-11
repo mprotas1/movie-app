@@ -1,11 +1,11 @@
 package com.protas.movieapp.controller;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.protas.movieapp.dto.DirectorDTO;
-import com.protas.movieapp.entity.movie.Director;
+import com.protas.movieapp.director.DirectorDTO;
+import com.protas.movieapp.director.Director;
 import com.protas.movieapp.exception.RestExceptionMessage;
-import com.protas.movieapp.repository.DirectorRepository;
-import com.protas.movieapp.service.director.DirectorCreateService;
+import com.protas.movieapp.director.DirectorRepository;
+import com.protas.movieapp.director.DirectorCreateService;
 import com.protas.movieapp.testcontainers.TestContainerBase;
 import jakarta.persistence.EntityNotFoundException;
 import org.junit.jupiter.api.BeforeEach;

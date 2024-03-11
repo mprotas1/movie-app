@@ -1,7 +1,7 @@
 package com.protas.movieapp.service.screening;
 
-import com.protas.movieapp.dto.ScreeningDTO;
-import com.protas.movieapp.mapper.ScreeningMapper;
+import com.protas.movieapp.screening.ScreeningDTO;
+import com.protas.movieapp.screening.ScreeningMapper;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;

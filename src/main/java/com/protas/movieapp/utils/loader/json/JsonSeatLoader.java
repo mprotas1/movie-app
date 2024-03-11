@@ -1,18 +1,15 @@
 package com.protas.movieapp.utils.loader.json;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.protas.movieapp.entity.cinema.Seat;
-import com.protas.movieapp.mapper.SeatMapper;
-import com.protas.movieapp.model.RoomSize;
+import com.protas.movieapp.seat.Seat;
+import com.protas.movieapp.seat.SeatMapper;
+import com.protas.movieapp.screeningroom.RoomSize;
 import com.protas.movieapp.utils.loader.AbstractSeatLoader;
 import com.protas.movieapp.utils.loader.SeatData;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Value;
-import org.springframework.context.annotation.PropertySource;
 import org.springframework.stereotype.Component;
 
-import java.io.File;
 import java.io.IOException;
 import java.nio.file.Path;
 import java.nio.file.Paths;

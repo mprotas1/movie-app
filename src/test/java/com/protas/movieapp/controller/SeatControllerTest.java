@@ -1,8 +1,8 @@
 package com.protas.movieapp.controller;
 
-import com.protas.movieapp.dto.SeatDTO;
-import com.protas.movieapp.entity.cinema.Seat;
-import com.protas.movieapp.repository.SeatRepository;
+import com.protas.movieapp.seat.SeatDTO;
+import com.protas.movieapp.seat.Seat;
+import com.protas.movieapp.seat.SeatRepository;
 import com.protas.movieapp.testcontainers.TestContainerBase;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;

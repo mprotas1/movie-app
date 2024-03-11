@@ -1,9 +1,10 @@
 package com.protas.movieapp.service.cinema;
 
-import com.protas.movieapp.entity.address.Address;
-import com.protas.movieapp.entity.cinema.Cinema;
-import com.protas.movieapp.mapper.CinemaMapper;
-import com.protas.movieapp.repository.CinemaRepository;
+import com.protas.movieapp.address.Address;
+import com.protas.movieapp.cinema.Cinema;
+import com.protas.movieapp.cinema.CinemaMapper;
+import com.protas.movieapp.cinema.CinemaReadService;
+import com.protas.movieapp.config.CinemaRepository;
 import jakarta.persistence.EntityNotFoundException;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;

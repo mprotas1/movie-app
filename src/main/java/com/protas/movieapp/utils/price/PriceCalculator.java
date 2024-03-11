@@ -1,7 +1,7 @@
 package com.protas.movieapp.utils.price;
 
-import com.protas.movieapp.entity.reservation.Reservation;
-import com.protas.movieapp.model.SeatType;
+import com.protas.movieapp.reservation.Reservation;
+import com.protas.movieapp.seat.SeatType;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
@@ -25,16 +25,12 @@ public class PriceCalculator {
     }
 
     private static BigDecimal getValueFromType(SeatType seatType) {
-        switch (seatType) {
-            case BASIC:
-                return basicPrice;
-            case NORMAL:
-                return normalPrice;
-            case VIP:
-                return vipPrice;
-            default:
-                throw new IllegalStateException("Unexpected value: " + seatType);
-        }
+        return switch (seatType) {
+            case BASIC -> basicPrice;
+            case NORMAL -> normalPrice;
+            case VIP -> vipPrice;
+            default -> throw new IllegalStateException("Unexpected value: " + seatType);
+        };
     }
 
 

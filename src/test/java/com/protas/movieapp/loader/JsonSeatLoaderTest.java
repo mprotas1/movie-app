@@ -1,6 +1,6 @@
 package com.protas.movieapp.loader;
 
-import com.protas.movieapp.model.RoomSize;
+import com.protas.movieapp.screeningroom.RoomSize;
 import com.protas.movieapp.utils.loader.AbstractSeatLoader;
 import com.protas.movieapp.utils.loader.json.JsonSeatLoader;
 import org.junit.jupiter.api.BeforeEach;

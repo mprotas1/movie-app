@@ -1,7 +1,7 @@
 package com.protas.movieapp.utils.loader;
 
-import com.protas.movieapp.entity.cinema.Seat;
-import com.protas.movieapp.model.RoomSize;
+import com.protas.movieapp.seat.Seat;
+import com.protas.movieapp.screeningroom.RoomSize;
 import lombok.Getter;
 import lombok.Setter;
 

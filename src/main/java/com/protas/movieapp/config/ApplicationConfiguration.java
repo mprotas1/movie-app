@@ -1,6 +1,6 @@
 package com.protas.movieapp.config;
 
-import com.protas.movieapp.repository.UserRepository;
+import com.protas.movieapp.user.UserRepository;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationManager;

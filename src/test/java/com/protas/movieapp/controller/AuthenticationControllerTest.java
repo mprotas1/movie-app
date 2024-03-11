@@ -1,11 +1,11 @@
 package com.protas.movieapp.controller;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.protas.movieapp.entity.user.Role;
-import com.protas.movieapp.entity.user.User;
-import com.protas.movieapp.model.AuthenticationResponse;
-import com.protas.movieapp.model.RoleType;
-import com.protas.movieapp.repository.UserRepository;
+import com.protas.movieapp.user.Role;
+import com.protas.movieapp.user.User;
+import com.protas.movieapp.user.AuthenticationResponse;
+import com.protas.movieapp.user.RoleType;
+import com.protas.movieapp.user.UserRepository;
 import com.protas.movieapp.testcontainers.TestContainerBase;
 import com.protas.movieapp.utils.jwt.JwtUtils;
 import org.json.JSONException;
@@ -19,7 +19,6 @@ import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.MvcResult;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 
-import java.util.List;
 import java.util.Optional;
 import java.util.Set;
 
