@@ -10,11 +10,11 @@ import org.springframework.stereotype.Service;
 @RequiredArgsConstructor
 @Transactional
 public class ScreeningRoomDeleteService {
-    private final Logger logger = LoggerFactory.getLogger(ScreeningRoomDeleteService.class.getName());
+    private final Logger LOGGER = LoggerFactory.getLogger(ScreeningRoomDeleteService.class.getName());
     private final ScreeningRoomRepository repository;
 
     public void deleteRoom(Integer roomId, Long cinemaId) {
-        logger.info("Deleting the room with id: {} from cinema with id: {}", roomId, cinemaId);
+        LOGGER.info("Deleting the room with id: {} from cinema with id: {}", roomId, cinemaId);
         repository.deleteByIdAndCinemaId(Long.valueOf(roomId), cinemaId);
     }
 

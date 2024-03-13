@@ -5,18 +5,30 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
 public class ScreeningRoomReadService {
     private final ScreeningRoomRepository repository;
-    public List<ScreeningRoom> findAllByCinemaId(Long cinemaId) {
+    private final ScreeningRoomMapper mapper;
+
+    public List<ScreeningRoomDTO> findAllByCinemaId(Long cinemaId) {
         return repository.findByCinemaId(cinemaId)
+                .orElseThrow(EntityNotFoundException::new)
+                .stream().map(mapper::fromEntity)
+                .toList();
+    }
+
+    public ScreeningRoomDTO findById(Integer roomId) {
+        return repository.findById(roomId)
+                .map(mapper::fromEntity)
                 .orElseThrow(EntityNotFoundException::new);
     }
 
-    public ScreeningRoom findById(Integer roomId) {
-        return repository.findById(roomId)
-                .orElseThrow(EntityNotFoundException::new);
+    boolean screeningRoomAlreadyExists(ScreeningRoomDTO dto, Long cinemaId) {
+        return repository
+                .findByScreeningRoomNumberAndCinemaId(dto.screeningRoomNumber(), cinemaId)
+                .isPresent();
     }
 }

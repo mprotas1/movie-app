@@ -60,11 +60,11 @@ public class User implements UserDetails {
         return email;
     }
 
-    public void setRoles(Collection<Role> rolesToAssign) {
-        rolesToAssign.forEach(this::setRoles);
+    public void addRole(Collection<Role> rolesToAssign) {
+        rolesToAssign.forEach(this::addRole);
     }
 
-    public void setRoles(Role role) {
+    public void addRole(Role role) {
         if(roles == null) roles = new HashSet<>();
         roles.add(role);
     }

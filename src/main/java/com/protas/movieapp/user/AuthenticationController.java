@@ -2,6 +2,7 @@ package com.protas.movieapp.user;
 
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.log4j.Log4j2;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.ResponseEntity;
@@ -30,5 +31,4 @@ public class AuthenticationController {
         LOGGER.info("Authenticating ");
         return ResponseEntity.ok(authenticationResponse);
     }
-
 }

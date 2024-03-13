@@ -22,7 +22,6 @@ public class Cinema {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    private UUID uuid = UUID.randomUUID();
 
     @NotBlank @Size(min = 5)
     private String name;

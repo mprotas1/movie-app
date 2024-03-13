@@ -10,7 +10,8 @@ class MovieUpdateService {
     private MovieRepository movieRepository;
     public void update(MovieDTO movieDTO, Long id) {
         Movie movieToUpdate = movieReadService.findById(id);
-        movieRepository.save(updateMovieUsingDTO(movieToUpdate, movieDTO));
+        Movie updated = updateMovieUsingDTO(movieToUpdate, movieDTO);
+        movieRepository.save(updated);
     }
 
     private Movie updateMovieUsingDTO(Movie movie, MovieDTO movieDTO) {

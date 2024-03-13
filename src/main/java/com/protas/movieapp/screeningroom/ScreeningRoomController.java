@@ -16,12 +16,12 @@ public class ScreeningRoomController {
     private final ScreeningRoomDeleteService deleteService;
 
     @GetMapping
-    public ResponseEntity<List<ScreeningRoom>> findAll(@PathVariable Long cinemaId) {
+    public ResponseEntity<List<ScreeningRoomDTO>> findAll(@PathVariable Long cinemaId) {
         return ResponseEntity.ok(readService.findAllByCinemaId(cinemaId));
     }
 
     @PostMapping
-    public ResponseEntity<ScreeningRoom> create(@RequestBody @Valid ScreeningRoomDTO roomDTO,
+    public ResponseEntity<ScreeningRoomDTO> create(@RequestBody @Valid ScreeningRoomDTO roomDTO,
                                          @PathVariable Long cinemaId) {
         return ResponseEntity.ok(createService.createRoomInCinema(roomDTO, cinemaId));
     }

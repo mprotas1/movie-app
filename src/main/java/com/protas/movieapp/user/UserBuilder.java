@@ -34,7 +34,7 @@ public class UserBuilder {
         result.setUsername(username);
         result.setPassword(password);
         result.setEmail(email);
-        result.setRoles(roles);
+        result.addRole(roles);
 
         return result;
     }

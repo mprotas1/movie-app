@@ -15,7 +15,7 @@ public abstract class UserMapper {
         user.setEmail(registerRequest.email());
         user.setUsername(registerRequest.username());
         user.setPassword(passwordEncoder.encode(registerRequest.password()));
-        user.setRoles(new Role().withRoleType(RoleType.USER));
+        user.addRole(new Role().withRoleType(RoleType.USER));
         return user;
     }
 }
