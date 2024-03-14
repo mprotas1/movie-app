@@ -13,7 +13,7 @@ class ScreeningRoomUpdateService {
     private final ScreeningRoomRepository repository;
     private final ScreeningRoomMapper mapper;
 
-    private ScreeningRoomDTO update(ScreeningRoomDTO dto, Long roomId) {
+    ScreeningRoomDTO update(ScreeningRoomDTO dto, Long roomId) {
         LOGGER.info("Updating the ScreeningRoom with id: {}", roomId);
         var result = repository.findById(roomId).orElseThrow(EntityNotFoundException::new);
         result.updateFromDTO(dto);

@@ -21,6 +21,7 @@ public class SeatCreateService {
         return seatRepository.saveAll(loader.loadSeats(roomSize));
     }
 
+    // TODO: fix the ScreeningRoom issue
     public Seat createSeat(SeatDTO dto, SeatType seatType, Long screeningRoomId) {
         throwExceptionOnExistingSeat(dto, screeningRoomId);
         var room = screeningRoomReadService.findById(screeningRoomId);

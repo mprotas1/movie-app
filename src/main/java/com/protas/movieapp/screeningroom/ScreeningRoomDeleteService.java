@@ -17,5 +17,4 @@ public class ScreeningRoomDeleteService {
         LOGGER.info("Deleting the room with id: {}", roomId);
         repository.deleteById(roomId);
     }
-
 }
