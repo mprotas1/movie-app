@@ -23,7 +23,7 @@ public class SeatCreateService {
 
     public Seat createSeat(SeatDTO dto, SeatType seatType, Long screeningRoomId) {
         throwExceptionOnExistingSeat(dto, screeningRoomId);
-        var room = screeningRoomReadService.findById(Math.toIntExact(screeningRoomId));
+        var room = screeningRoomReadService.findById(screeningRoomId);
         return seatRepository.save(Seat.builder()
                 .withRow(dto.row())
                 .withColumn(dto.column())

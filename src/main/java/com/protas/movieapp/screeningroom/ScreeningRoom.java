@@ -15,7 +15,7 @@ import java.util.List;
 @NoArgsConstructor
 public class ScreeningRoom {
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id;
+    private Long id;
 
     private Integer screeningRoomNumber;
 
@@ -49,4 +49,8 @@ public class ScreeningRoom {
         this.screenings.add(screening);
     }
 
+    public void updateFromDTO(ScreeningRoomDTO dto) {
+        if(dto.size() != null) this.setRoomSize(dto.size());
+        if(dto.screeningRoomNumber() != null) this.setScreeningRoomNumber(dto.screeningRoomNumber());
+    }
 }

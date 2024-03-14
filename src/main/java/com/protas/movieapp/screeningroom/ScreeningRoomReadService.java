@@ -20,7 +20,7 @@ public class ScreeningRoomReadService {
                 .toList();
     }
 
-    public ScreeningRoomDTO findById(Integer roomId) {
+    public ScreeningRoomDTO findById(Long roomId) {
         return repository.findById(roomId)
                 .map(mapper::fromEntity)
                 .orElseThrow(EntityNotFoundException::new);

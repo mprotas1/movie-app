@@ -13,9 +13,9 @@ public class ScreeningRoomDeleteService {
     private final Logger LOGGER = LoggerFactory.getLogger(ScreeningRoomDeleteService.class.getName());
     private final ScreeningRoomRepository repository;
 
-    public void deleteRoom(Integer roomId, Long cinemaId) {
-        LOGGER.info("Deleting the room with id: {} from cinema with id: {}", roomId, cinemaId);
-        repository.deleteByIdAndCinemaId(Long.valueOf(roomId), cinemaId);
+    public void deleteRoom(Long roomId) {
+        LOGGER.info("Deleting the room with id: {}", roomId);
+        repository.deleteById(roomId);
     }
 
 }
