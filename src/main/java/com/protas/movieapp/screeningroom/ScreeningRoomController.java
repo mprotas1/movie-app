@@ -22,7 +22,7 @@ class ScreeningRoomController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<ScreeningRoomDTO> findById(@PathVariable Long id) {
+    public ResponseEntity<ScreeningRoom> findById(@PathVariable Long id) {
         return ResponseEntity.ok(readService.findById(id));
     }
 

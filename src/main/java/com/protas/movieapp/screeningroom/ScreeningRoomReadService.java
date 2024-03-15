@@ -16,13 +16,13 @@ public class ScreeningRoomReadService {
     public List<ScreeningRoomDTO> findAllByCinemaId(Long cinemaId) {
         return repository.findByCinemaId(cinemaId)
                 .orElseThrow(EntityNotFoundException::new)
-                .stream().map(mapper::fromEntity)
+                .stream()
+                .map(mapper::fromEntity)
                 .toList();
     }
 
-    public ScreeningRoomDTO findById(Long roomId) {
+    public ScreeningRoom findById(Long roomId) {
         return repository.findById(roomId)
-                .map(mapper::fromEntity)
                 .orElseThrow(EntityNotFoundException::new);
     }
 

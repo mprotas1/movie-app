@@ -5,6 +5,7 @@ import com.protas.movieapp.cinema.Cinema;
 import com.protas.movieapp.screening.Screening;
 import com.protas.movieapp.seat.Seat;
 import jakarta.persistence.*;
+import jakarta.validation.constraints.Positive;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -17,6 +18,7 @@ public class ScreeningRoom {
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @Positive
     private Integer screeningRoomNumber;
 
     @Enumerated(EnumType.STRING)
@@ -43,10 +45,6 @@ public class ScreeningRoom {
         this.screeningRoomNumber = dto.screeningRoomNumber();
         this.roomSize = dto.size();
         this.cinema = cinema;
-    }
-
-    public void addScreening(Screening screening) {
-        this.screenings.add(screening);
     }
 
     public void updateFromDTO(ScreeningRoomDTO dto) {

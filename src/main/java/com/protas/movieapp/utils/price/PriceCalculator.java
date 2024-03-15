@@ -32,6 +32,4 @@ public class PriceCalculator {
             default -> throw new IllegalStateException("Unexpected value: " + seatType);
         };
     }
-
-
 }

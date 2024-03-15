@@ -18,7 +18,7 @@ import java.util.function.Function;
 @Service
 @RequiredArgsConstructor
 @Transactional
-public class ScreeningRoomCreateService {
+class ScreeningRoomCreateService {
     private final Logger LOGGER = LoggerFactory.getLogger(ScreeningRoomCreateService.class.getName());
     private final ScreeningRoomRepository repository;
     private final CinemaReadService cinemaReadService;
@@ -26,7 +26,7 @@ public class ScreeningRoomCreateService {
     private final SeatCreateService seatCreateService;
     private final ScreeningRoomMapper screeningRoomMapper;
 
-    public ScreeningRoomDTO createRoomInCinema(ScreeningRoomDTO dto, Long cinemaId) {
+    ScreeningRoomDTO createRoomInCinema(ScreeningRoomDTO dto, Long cinemaId) {
         Cinema cinema = cinemaReadService.findById(cinemaId);
         if(screeningRoomReadService.screeningRoomAlreadyExists(dto, cinemaId)) {
             LOGGER.error("The room with number {} already exists in the cinema", dto.screeningRoomNumber());

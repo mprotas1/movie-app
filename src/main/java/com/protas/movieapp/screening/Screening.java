@@ -48,5 +48,4 @@ public class Screening {
         var resultTime = startTime.plusMinutes((long) duration);
         setEndTime(resultTime);
     }
-
 }
