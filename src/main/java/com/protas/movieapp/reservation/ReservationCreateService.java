@@ -16,27 +16,27 @@ import org.springframework.stereotype.Service;
 public class ReservationCreateService {
     private final Logger LOGGER = LoggerFactory.getLogger(this.getClass().getName());
     private final ReservationRepository reservationRepository;
+    private final ReservationReadService reservationReadService;
     private final ScreeningReadService screeningReadService;
     private final SeatReadService seatReadService;
+    private final ReservationMapper mapper;
 
     @Transactional
     public ReservationDTO doReservation(ReservationDTO reservationDTO, User customer) {
         LOGGER.info("Performing reservation for user: {} for Screening: {}", customer.getId(), reservationDTO.screeningId());
         Screening screening = screeningReadService.findById(reservationDTO.screeningId());
         Seat reservationSeat = seatReadService.getSeatFromScreeningRoomAndSeatDTO(screening.getScreeningRoom(), reservationDTO.seatDTO());
-        if(reservationExistsById(reservationSeat.getId())) {
-            throw new RuntimeException("The reservation for this Seat already exists");
+        if(reservationReadService.reservationExistsBySeatId(reservationSeat.getId())) {
+            LOGGER.info("Could not process the Reservation - the Seat [{} {}] is already taken",
+                    reservationSeat.getSeatRowNumber(),
+                    reservationSeat.getSeatColumnNumber());
+            throw new SeatIsAlreadyTakenException("The reservation for this Seat already exists");
         }
         Reservation reservation = Reservation.builder()
                 .withCustomer(customer)
                 .withScreening(screening)
                 .withSeat(reservationSeat)
                 .build();
-        return ReservationMapper.toDTO(reservationRepository.save(reservation));
+        return mapper.toDTO(reservationRepository.save(reservation));
     }
-
-    private boolean reservationExistsById(Long seatId) {
-        return reservationRepository.findReservationBySeatId(seatId).isPresent();
-    }
-
 }

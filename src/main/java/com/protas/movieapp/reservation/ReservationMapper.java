@@ -2,11 +2,14 @@ package com.protas.movieapp.reservation;
 
 import com.protas.movieapp.seat.SeatDTO;
 import com.protas.movieapp.user.User;
+import org.mapstruct.Mapper;
 
-public class ReservationMapper {
+@Mapper(componentModel = "spring")
+interface ReservationMapper {
 
-    public static Reservation reservationFromReservationDTOAndCustomer(ReservationDTO reservationDTO,
-                                                                       User customer) {
+    Reservation reservationFromReservationDTOAndCustomer(ReservationDTO reservationDTO, User customer);
+
+    /*{
         if(reservationDTO == null) {
             return null;
         }
@@ -14,11 +17,6 @@ public class ReservationMapper {
         reservation.setCustomer(customer);
         return reservation;
     }
-
-    public static ReservationDTO toDTO(Reservation reservation) {
-        return new ReservationDTO(reservation.getMovieScreening().getId(),
-                new SeatDTO(reservation.getSeat().getSeatRowNumber(),
-                        reservation.getSeat().getSeatColumnNumber()));
-    }
-
+    */
+   ReservationDTO toDTO(Reservation reservation);
 }
