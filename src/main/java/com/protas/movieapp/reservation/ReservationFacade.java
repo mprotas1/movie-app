@@ -16,7 +16,7 @@ import java.time.LocalDateTime;
 
 @Service
 @RequiredArgsConstructor
-public class ReservationCreateService {
+public class ReservationFacade {
     private final Logger LOGGER = LoggerFactory.getLogger(this.getClass().getName());
     private final ReservationRepository reservationRepository;
     private final ReservationReadService reservationReadService;
