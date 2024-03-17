@@ -20,7 +20,7 @@ public class ScreeningController {
 
     @PostMapping
     public ResponseEntity<Screening> create(@RequestBody ScreeningRequestDTO screeningRequestDTO,
-                                            @PathVariable Integer roomId) {
+                                            @PathVariable Long roomId) {
         Screening savedScreening = screeningCreateService.create(screeningRequestDTO, roomId);
         return ResponseEntity.ok(savedScreening);
     }

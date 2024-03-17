@@ -12,6 +12,7 @@ import org.springframework.data.web.PageableDefault;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.validation.ValidationUtils;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -26,22 +27,19 @@ class ReservationController {
     private final UserAuthService userService;
 
     @PostMapping
-    ResponseEntity<ReservationDTO> doReservation(@RequestParam Long screeningId,
-                                                 @RequestBody @Valid SeatDTO seatDTO) {
+    ResponseEntity<ReservationDTO> doReservation(@RequestBody ReservationDTO reservationDTO) {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         User currentUser = userService.getUserFromAuthentication(authentication);
 
-        ReservationDTO reservationDTO = new ReservationDTO(screeningId, seatDTO);
-
         LOGGER.info("Performing reservation for user: {}", authentication.getPrincipal());
 
-        ReservationDTO reservation = reservationFacade.doReservation(reservationDTO, currentUser);
+        var reservation = reservationFacade.doReservation(reservationDTO, currentUser);
         return ResponseEntity.ok(reservation);
     }
 
-    @GetMapping("/user/{userId}")
+    @GetMapping
     ResponseEntity<List<ReservationDTO>> findForCustomer(@PageableDefault Pageable pageable,
-                                                         @PathVariable Long userId) {
+                                                         @RequestParam Long userId) {
         var reservations = reservationReadService.findAllByCustomerId(userId, pageable);
         LOGGER.info("Retrieved {} reservations for User with id {}", reservations, userId);
         return ResponseEntity.ok(reservations);
@@ -49,6 +47,8 @@ class ReservationController {
 
     @GetMapping("/{reservationId}")
     ResponseEntity<ReservationDTO> findById(@PathVariable Long reservationId) {
-        return ResponseEntity.ok(reservationReadService.findById(reservationId));
+        var reservation = reservationReadService.findById(reservationId);
+        LOGGER.info("Retrieved reservation of id: {} with body:\n{}", reservationId, reservation);
+        return ResponseEntity.ok(reservation);
     }
 }

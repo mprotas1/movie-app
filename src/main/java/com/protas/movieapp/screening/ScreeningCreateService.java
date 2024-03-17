@@ -15,13 +15,13 @@ public class ScreeningCreateService {
     private final ScreeningRoomRepository screeningRoomRepository;
     private final MovieReadService movieReadService;
 
-    public Screening create(ScreeningRequestDTO screeningRequestDTO, Integer roomId) {
+    public Screening create(ScreeningRequestDTO screeningRequestDTO, Long roomId) {
         var screening = getScreeningFromScreeningRequestDTO(screeningRequestDTO, roomId);
         return screeningRepository.save(screening);
     }
 
     private Screening getScreeningFromScreeningRequestDTO(ScreeningRequestDTO screeningRequestDTO,
-                                                      Integer roomId) {
+                                                      Long roomId) {
         var room = screeningRoomRepository.findById(roomId).orElseThrow(EntityNotFoundException::new);
         var movie = movieReadService.findById(screeningRequestDTO.movieId());
         return new Screening(movie, screeningRequestDTO.startTime(), room);

@@ -9,7 +9,7 @@ import java.util.Optional;
 
 @Repository
 public interface SeatRepository extends JpaRepository<Seat, Long> {
-    Optional<Seat> findByRoomIdAndSeatRowNumberAndSeatColumnNumber(@Param(value = "room_id") Integer roomId,
+    Optional<Seat> findByRoomIdAndSeatRowNumberAndSeatColumnNumber(@Param(value = "room_id") Long roomId,
                                                @Param(value = "seat_row") Integer row,
                                                @Param(value = "seat_column") Integer column);
 
